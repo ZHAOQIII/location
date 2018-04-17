@@ -1,0 +1,26 @@
+\documentclass{article}
+
+\usepackage{ctex}
+
+\usepackage{multicol}
+
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{lscape}
+
+\author{Qi Zhao}
+
+\date{April 15,2018}
+
+\title{AI-spy}
+
+
+\begin{document}
+
+
+\maketitle
+\par The AI is keeping coming into view, especially in business. Firms all of types are harnessing AI to forecast demand, hire workers and deal with customers. So the predictions from Mckinsey Global Institution and Google kindle hope on profits and efficiency. But at the same time, it also bring anxiety, which many fret that AI could destroy jobs faster than it creates them. Because managers can gain extraordinary control over their employees. On the one hand,employees will gain, too. AI can check that workers are wearing safety gear that no one has been harmed on the factory floor. Meanwhile, machine can help ensure that pay rises and promotions go to those who deserve them, which in more impartial. On the another hand, if AI prefers its productivity, someone could lose their positions, which don¡¯t consider employees¡¯ economist and age.
+\par A fairer, more productive workforce is a prize worth having, but no if it shackles and dehumanises employees. Striking a balance will require thought, a willingness for both employees to adapt, and a strong dose of humanity.
+
+
+\end{document}
