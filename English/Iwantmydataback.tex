@@ -1,0 +1,39 @@
+\documentclass{article}
+
+\usepackage{ctex}
+
+\usepackage{multicol}
+
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{lscape}
+
+\usepackage{graphicx}
+
+\usepackage[colorlinks=true]{hyperref}
+
+\usepackage{subfigure}
+
+\author{Qi Zhao}
+
+\date{May 15,2018}
+
+\title{I want my data back}
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+\begin{document}
+
+
+\maketitle
+\par Chili's parent company, Brinker International, announced over the weekend that customers' payment information may have been exposed in a malware attack\cite{Khouzani2010Maximum}(see Fig.{\color{red}1}). And data belonging to some customers were vulnerable on its website for at least eight months, which included names, addresses and the last four digits of credit card numbers.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{chilli.jpg}
+\caption{A customer walks toward the entrance of a Brinker International Inc.}
+\label{1}
+\end{figure}
+\par Recently, Applebee's found malware on its payment systems in 167 locations across 15 states, potentially exposing customer credit card data. The barrage of data breaches at restaurants and other businesses highlights the heightened risks of identity theft and the continued vulnerabilities presented by payment systems, databases of customer information, and mobile apps. Now it is working with independent experts to investigate to investigate the issue. We hope the company can keep our data safe when we give them our information trustfully.
+\bibliographystyle{ieeetr}
+\bibliography{10}
+
+\end{document}
