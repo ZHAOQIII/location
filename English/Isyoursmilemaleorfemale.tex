@@ -1,0 +1,43 @@
+\documentclass{article}
+
+\usepackage{ctex}
+
+\usepackage{multicol}
+
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{lscape}
+
+\usepackage{graphicx}
+
+\usepackage[colorlinks=true]{hyperref}
+
+\usepackage{amsmath}
+
+\usepackage{subfigure}
+
+\author{Qi Zhao}
+
+\date{May 19,2018}
+
+\title{Is your smile male or female?}
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+\begin{document}
+
+
+\maketitle
+\par The dynamics of how men and women smile differs measurably (see Fig.{\color{red}1}), according to new research, enabling AI to automatically assign gender purely based on a smile.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\textwidth]{smile.jpg}
+\caption{Men and women smiling.}
+\label{1}
+\end{figure}
+\par Although automatic gender recognition is already available, existing methods use static images\cite{Pantic2004Facial} and compare fixed facial features. The team mapped 49 landmarks on the face, mainly around the eyes, mouth and down the nose. They used these to assess how the face changes as we smile caused by the underlying muscle movements -- including both changes in distances between the different points and the 'flow' of the smile: how much, how far and how fast the different points on the face moved as the smile was formed. They discover women's smiles are more expansive. And they used a fairly simple machine classification for this research, which the computer was able to correctly determine gender in 86 percent of cases, more sophisticated AI would improve the recognition rates.
+\par The underlying purpose of this research is more about trying to enhance machine learning capabilities\cite{Alves2004Machine}, but it has raised a number of intriguing questions that the team hopes to investigate in future projects. One is how the machine might respond to the smile of a transgender person and the other is the impact of plastic surgery on recognition rates.
+\bibliographystyle{ieeetr}
+\bibliography{12}
+
+\end{document}
