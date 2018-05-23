@@ -1,0 +1,51 @@
+\documentclass{article}
+
+\usepackage{ctex}
+
+\usepackage{multicol}
+
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{lscape}
+
+\usepackage{graphicx}
+
+\usepackage[colorlinks=true]{hyperref}
+
+\usepackage{amsmath}
+
+\usepackage{subfigure}
+
+\author{Qi Zhao}
+
+\date{May 23,2018}
+
+\title{Salt-and-Pepper Noise~\cite{Bar2005Image} Removal by Median-Type Noise Detectors and Detail-Preserving Regularization}
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+\begin{document}
+
+
+\maketitle
+\par Impulse noise~\cite{Wang1999Progressive} is caused by malfunctioning pixels in camera  sensors,  faulty  memory  locations  in  hardware, or transmission in a noisy channel.
+\par Two common types of impulse noise are the salt-and-pepper noise and the random-valued noise. For images corrupted by salt-and-pepper noise. The median filter was once the most popular nonlinear filter for removing impulse noise because of its good denoising power and computational efficiency. However, when the noise level is over 50 percent, some details and edges of the original image are smeared by the filter. Different remedies of the median filter have been proposed, e.g., the adaptive median filter , the multistate median filter, or the median filter based on homogeneity information. These so-called ¡°decision-based¡± or ¡°switching¡± filters first identify possible noisy pixels and then replace them by using the median filter or its variants, while leaving all other pixels unchanged. What¡¯s more, for images corrupted by Gaussian noise, least-squares methods based on edge-preserving regularization functionals have been used successfully to preserve the edges and the details in the images.
+\begin{figure}[htbp]
+\centering
+\subfigure[]{
+\label{figa} %% label for first subfigure
+\includegraphics[width=1.5in]{noise1.JPG}}
+\hspace{1in}
+\subfigure[]{
+\label{fig:subfig:b}
+\includegraphics[width=1.5in]{noise2.JPG}}
+\caption{Results in PSNR and MAE for the Lena image at various noise levels for different algorithms.}
+\label{figb}
+\end{figure}
+
+
+\par Therefore, the team proposes a two-phase scheme for removing salt-and-pepper impulse noise. In the first phase, an adaptive median filter is used to identify pixels which are likely to be contaminated by noise (noise candidates). In the second phase, the image is restored using a specialized regularization method that applies only to those selected noise candidates. In terms of edge preservation and noise suppression, our restored images show a significant improvement compared to those restored by using just nonlinear filters or regularization methods only. Our scheme can remove salt-and-pepper-noise with a noise level as high as 90\% (see Fig.{\color{red}1}).
+
+\bibliographystyle{plain}
+\bibliography{15}
+
+\end{document}
