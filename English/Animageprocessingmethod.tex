@@ -1,0 +1,43 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{4321}
+\begin{document}
+\title{An image processing method}
+\author{Qi Zhao\\\\May 5, 2018}
+
+\maketitle
+\section{Background of the invention}
+ The present invention relates to an image processing method for correcting the influences of defects such as dust~\cite{Li2012Infrared}, scratches, fingerprints, and the like present on a transparent original upon reading image information of the transparent original, an image processing apparatus for executing the image processing method, and a storage medium for com-putter-readably storing a program for correcting the influences of defects.
+\section{Description}
+ An image processing apparatus for reading image information of a transparent original is normally constituted by a host computer~\cite{Zou2008Host}, such as a so-called personal computer, which we can get it in the Figures~\ref{fig:onecol}. The image reader reads an image on a film original on the basis of a command from the host computer, and outputs the read image data to the host computer. Color image reading~\cite{Chan1997Reading} is normally done by switching three colors, i.e., red (R), green (G), and blue (B). However, when defects such as dust, scratches, fingerprints, and the like are present on a film original, these defects appear as black points (in case of a positive film) or white points (in case of a negative film) on the read image, thus lowering the image quality. To solve such problem, a technique for detecting defects such as dust, scratches, fingerprints, and the like using the properties of infrared light and correcting the influences of defects has been proposed. That is, when the infrared ray energy intensity detected at a given timing is larger than a predetermined threshold value, the visible ray energy intensity is increased to a level that can cancel the infrared ray energy intensity, and when the detected infrared ray energy intensity is equal to or lower than the predetermined threshold value, the visible ray energy intensity is corrected by interpolation, thereby correcting the influences of defects.
+\begin{figure}[t]
+\begin{center}
+
+\includegraphics[width=0.8\linewidth]{method.JPG}
+\end{center}
+ \caption{A block diagram showing the arrangement of an image processing apparatus according to an embodiment
+of the present invention.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+\section{Summary of the invention}
+ It provide an image processing method that can surely acquire an image free from the influences of defects on a transparent original, an image processing apparatus for executing the image processing method. Therefore, since correction can be attained in correspondence with the attenuation amount, an image can be reproduced more appropriately than the conventional method.
+{\small
+\bibliographystyle{ieee}
+\bibliography{17}
+}
+
+
+\end{document}
+
