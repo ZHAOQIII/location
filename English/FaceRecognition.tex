@@ -1,0 +1,60 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{4321}
+\begin{document}
+\title{Face Recognition under Variable Illumination by Weighted-Subband Edge~\cite{Mayyas2005A} Enhancement}
+\author{Qi Zhao\\\\May 27, 2018}
+
+\maketitle
+It presents a novel weighted-subband method based on wavelet decomposition for face recognition under variable illumination. Different levels of subbands contain different features of the edge of a human face image. Through assigning a weight to each subband, we can strengthen the features beneficial to recognition, and weaken the features detrimental to recognition.
+\section{Introduction}
+ This article is devoted to the illumination problem in face recognition. There are several methods dealing with the illumination problem. Histogram equalization (HE)~\cite{Pizer1987Adaptive} is the earliest method for image processing. Another relighting method is Quotient Image~\cite{Wang2004Generalized}, using a quotient of albedo functions of two images to estimate and deal with the illumination, which opens up a new approach to relighting. From then on, region-based strategy has been employed in many methods. Perez et al. [10] propose an improved Self-Quotient Image (GO-SQI) method based on the original SQI method. Another improved QI method is Dynamic Morphological QI(DMQI), which assigns weights to sub-blocks of a face image.
+\par Weighted-Subband Edge Enhancement (WSEE): the wavelet method can decompose an image into different levels of approximation and detail subbands. These subbands contain different kinds of edge features that can be utilized in face recognition. their strategy is to strengthen the subbands which are beneficial to recognition, and to weaken the subbands which are detrimental to recognition. Thus we assign a weight to each subband of a face image. we propose $i^2$ Division Histogram Equalization~\cite{Chu2013A}($i^2$ DHE) and $i^2$ Division Border Smoothing ($i^2$ DBS) as pre-processing steps before WSEE to make the edge of a face image emerge. Table~\ref{fig:onecol} shows the cor-rect rates of $i^2$ DHE. Figure~\ref{fig:onecol} shows the visual results of $i^2$ DHE and $i^2$ DBS.
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+i &2&4&8&10&16\\
+\hline
+Span of \\MET & 6 & 6 & 6 & 6 & 6\\
+\hline
+CR with \\ $i^2$ DBS & 56.23\% & 60.73\% & 76.14\%& 78.79\% & 83.04\%\\
+CR without \\ $i^2$ DBS & 55.89\% & 61.03\% & 75.76\%& 78.03\% & 81.78\%\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Results of $i^2$ DHE and $i^2$ DBS, CR=Correct Rate, Testing Samples=2376.}
+\end{table}
+
+\begin{figure}[t]
+\begin{center}
+
+\includegraphics[width=0.8\linewidth]{dhe.JPG}
+\end{center}
+ \caption{Images with $i^2$ DHE and $i^2$ DBS.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+\section{Summary}
+ This article introduces a novel method based on wavelet analysis. First they de-compose an image into different subbands. Then a weight is assigned to each sub-band with a regularization criterion function to tune these weights.Through modifying these weights, the subbands benifical to recognition are strengthened, while those detrimental to recognition are weakened.
+{\small
+\bibliographystyle{ieee}
+\bibliography{18}
+}
+
+
+\end{document}
+
