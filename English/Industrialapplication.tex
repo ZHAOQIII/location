@@ -1,0 +1,45 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Industrial application of image processing}
+\author{Qi Zhao\\\\May 29, 2018}
+
+\maketitle
+\section{Introduction}
+ Traditionally, visual inspection and quality control are performed by people, but they are much slower and they cannot work for long periods of time as their eyes get tired and need to relax. Machine vision~\cite{sonka2014image} can replace human inspection in some cases. A vision system has become a vital component of advanced manufacturing systems~\cite{mehrabi2000reconfigurable}, for two main reasons. Firstly, it provides a means of controlling quality during manufacturing of goods, and secondly, robotic assemblies can be provided with the necessary information in order to assemble complex products from a set of basic components.
+\section{Description}
+ Figure~\ref{fig:onecol} illustrates the structure of a general purpose industrial vision system. Firstly, the scene needs to be properly illuminated and arranged in order to facilitate a good image acquisition. Images are commonly acquired by one or more cameras placed in the neighbourhood of the inspected scene. The cameras are usually in fixed positions. In general, inspection takes place only for known objects and in fixed positions. A central processing unit is employed in the extraction, processing and classification of image features. These features need to be known in advance. When the process is time constrained or computational intensive, then dedicated hardware is employed to cope with this problem. The most notable difference of these two applications of image processing is that a line-scan camera is used for inspection of components on a conveyor, while a wide angle camera is needed for assembly operations.
+
+
+\begin{figure}[t]
+\begin{center}
+
+\includegraphics[width=0.8\linewidth]{application.JPG}
+\end{center}
+ \caption{A general industrial vision system.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+\section{Conclusions}
+ It can be noticed that a major purpose of inspection systems is to take instant decisions on the compliance of products. Related to this purpose are the often fluid criteria for making such decisions and the need for training the system in such a way, so that the decisions that are made are at least as good as those that would have arisen with human inspectors. In addition, training schemes are valuable in making inspection systems more general and adaptive, particularly with regard to change of product. The automated visual inspection falls under the general heading of computer-aided manufacture (CAM)~\cite{aldinger1983computer}, of which computer-aided design (CAD)~\cite{renner2003genetic} is part of.
+{\small
+\bibliographystyle{ieee}
+\bibliography{19}
+}
+
+
+\end{document}
+
