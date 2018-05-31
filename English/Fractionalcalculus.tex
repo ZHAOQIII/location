@@ -1,0 +1,51 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{4321}
+\begin{document}
+\title{An image processing method}
+\author{Qi Zhao\\\\May 29, 2018}
+
+\maketitle
+\section{Introduction}
+The subject of fractional calculus~\cite{Oldham1974The} and its applications have gained considerable popularity during the past decades or so in diverse fields of science and engineering, like dynamics system~\cite{Zeigler2000Theory} and image processing. As to image processing, the work flow using fractional-order is shown in the Figure~\ref{fig:onecol}, which fractional-order derivative definition, discretization method and related toolboxes in Matlab are introduced.. The flow contains three steps. Firstly, the effective operator, model or equation involving ordinary differentiation and integration is selected. Then, the ordinary differentiation and integration are generalized to fractional-order (arbitrary order) using the fractional calculus definition (G-L, R-L or Caputo). Finally, numerical approximation to the fractional-order operator, model or equation will be calculated by discretization methods.
+\begin{figure}[htbp]
+\begin{center}
+
+\includegraphics[width=0.8\linewidth]{numerical.JPG}
+\end{center}
+ \caption{Fractional-order image processing flow.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\section{Description}
+As for image enhancement, most integral differential operators work well when used for high-frequency features of image (e.g. Sobel, Prewitt, and Laplacian of Gaussian operators). Nevertheless, their performance deteriorates significantly when applied to smooth regions. Whereas the fractional differential operator has the capability of not only preserving high-frequency contour features, but also improving the low-frequency texture details in smooth area. Therefore, more and more fractional differentiation-based methods were applied in the field of image enhancement. A number of cutting-edge techniques have been proposed in two categories: transform-based and spatial domain-based. In transform-based methods, images are converted to fractional frequency domain, and the coefficients of filter~\cite{Fujii2001Method} function are regulated. Finally, all the output images are obtained by inverse transform. These methods improve the image contrast to achieve better texture and seldom noise is introduced, whereas spatial domain-based methods using fractional differential approaches can completely avoid noise introduction while enhancing image. Among the different fractional differential approaches, fractional differential mask operator design stands out as a particularly important method.
+ \par Commonly fractional differential mask operators~\cite{Pu2010Fractional} are designed or rewritten for the purposes of fractional differential, fractional integral, different parameter range, best convergence and precision respectively. Mask structure includes single direction, multi-direction (group direction) and non-regular region. Single direction masks are difficult to capture image gradient for better enhancement result. To obtain the fractional differential on the multiple symmetric directions and make the fractional differential masks have anti-rotation capability, 8 fractional differential masks are designed which include the directions of negative x-coordinate, negative y-coordinate, positive x-coordinate, positive y-coordinate, left downward diagonal, right upward diagonal, left upward diagonal, and right downward diagonal, right upward diagonal, left upward diagonal, and right downward diagonal (see Figure~\ref{fig:short}). By constructing a non-regular self-similar support region according to a local texture similarity measure it can effectively exclude pixels with low correlation and noise.
+\begin{figure}[htbp]
+\begin{center}
+
+\includegraphics[width=0.8\linewidth]{eight.JPG}
+\end{center}
+ \caption{Eight directions operator~\cite{Zheng2013Edge}.}
+\label{fig:long}
+\label{fig:short}
+\end{figure}
+\section{Conclusion}
+In the image, edge and texture characteristics are different with ath-order value. To treat the edge and texture differently, piecewise function of ¦Áth-order fractional differential was used to design the corresponding adaptive fractional differential function, with a high order in edge pixels and a relatively small order in the weak texture pixels.
+{\small
+\bibliographystyle{ieee}
+\bibliography{20}
+}
+
+
+\end{document}
+
