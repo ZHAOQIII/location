@@ -1,0 +1,61 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{A new, fast, and efficient image codec based on set partitioning in hierarchical trees}
+\author{Qi Zhao\\\\June 2, 2018}
+
+\maketitle
+\par Embedded zerotree wavelet (EZW)~\cite{creusere1997new} coding, introduced by J. M. Shapiro, is a very effective and computationally simple technique for image compression. In the paper, it presents a new and different implementation, based on set partitioning in hierarchical trees (SPIHT)~\cite{kim2000low}, which provides even better performance than our previously reported extension of the EZW that surpassed the performance of the original EZW. The image coding results, calculated from actual file sizes and images reconstructed by the decoding algorithm, are either comparable to or surpass previous results obtained through much more sophisticated and computationally complex methods. In addition, the new coding and decoding procedures are extremely fast, and they can be made even faster, with only small loss in performance, by omitting entropy coding of the bit stream by arithmetic code.
+\section{Introduction}
+Image compression techniques, especially non-reversible or lossy ones, have been known to grow computationally more complex as they grow more efficient, confirming the tenets of source coding theorems~\cite{Gray2003Process} in information theory that a code for a (stationary) source approaches optimality in the limit of infinite computation (source length). In this article, it explains that the EZW technique is based on three concepts: (1) partial ordering of the transformed image elements by magnitude, with transmission of order by a subset partitioning algorithm that is duplicated at the decoder, (2) ordered bit plane transmission of refinement bits, and (3) exploitation of the self-similarity of the image wavelet transform across different scales. As to be explained, the partial ordering is a result of comparison of transform element (coefficient) magnitudes to a set of octavely decreasing thresholds. We say that an element is significant or insignificant with respect to a given threshold, depending on whether or not it exceeds that threshold. Following that significant work, it developed an alternative exposition of the underlying principles of the EZW technique and presented an extension that achieved even better results. The crucial parts of the coding process--the way subsets of coefficients are partitioned and how the significance information is conveyed--are fundamentally different from the aforementioned works. Moreover, the utilization of arithmetic coding can reduce the mean squared error or increase the peak signal to noise ratio (PSNR)~\cite{Grandy2012An} by 0.3 to 0.6 dB for the same rate or compressed file size and achieve results which are equal to or superior to any previously reported, regardless of complexity(see Figure~\ref{fig:onecol}).
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{PSNR.JPG}
+\end{center}
+ \caption{Comparative evaluation of the new co ding method.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\section{Conclusion}
+We have presented an algorithm that operates through set partitioning in hierarchical trees (SPIHT) and accomplishes completely embedded coding. This SPIHT algorithm uses the principles of partial ordering by magnitude, set partitioning by significance of magnitudes with respect to a sequence of octavely decreasing thresholds, ordered bit plane transmission, and self-similarity across scale in an image wavelet transform. The realization of these principles in matched coding and decoding algorithms is a new one and is shown to be more effective than in previous implementations of EZW coding. The image coding results in most cases surpass those reported previously on the same images, which use much more complex algorithms and do not possess the embedded co ding property and precise rate control. The software and documentation, which are copyrighted and under patent application, may b e accessed in the Internet site with URL of http://ipl.rpi.edu/SPIHT or by anonymous ftp to ipl.rpi.edu with the path in the compressed archive file codetree.tar.gz. (The file must be decompressed with the command gunzip~\cite{Cole1999The} and exploded with the command `tar xvf'; the instructions are in the file codetree.doc.) We feel that the results of this co ding algorithm with its embedded code and fast execution are so impressive that it is a serious candidate for standardization in future image compression systems(see Table~\ref{fig:onecol}).
+\begin{small}
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multirow{2}*{rate(bpp)} &\multicolumn{2}{|c|} {binary uncoded} & \multicolumn{2}{|c|}{arithmetic coded} \\
+\cline{2-5}
+ ~ & code&decode& code&decode\\
+\hline
+0.25 & 0.07&0.04&0.18&0.14 \\
+\hline
+0.50 & 0.14&0.09&0.33&0.29\\
+\hline
+1.00 & 0.27&0.17&0.64&0.57\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Effect of entropy-coding the significance data on the CPU times (s) to code and decode the image LENA 512 x 512(IBM RS/6000 workstation).}
+\end{table}
+\end{small}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{21}
+}
+
+
+\end{document}
+
