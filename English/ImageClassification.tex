@@ -1,0 +1,42 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Locality-constrained Linear Coding~\cite{wang2012locality} for Image Classification}
+\author{Qi Zhao\\\\June 4, 2018}
+
+\maketitle
+\section{Introduction}
+ This paper presents a simple but effective coding scheme called Locality-constrained Linear Coding (LLC) in place of the vector quantization (VQ)~\cite{gersho2012vector} coding in traditional spatial pyramid matching (SPM)~\cite{lazebnik2009spatial}. The recent state-of-the-art image classification systems consist of two major parts: bag-of-features (BoF)~\cite{jegou2010improving} and spatial pyramid matching (SPM). The BoF method represents an image as a histogram of its local features. It is especially robust against spatial translations of features, and demonstrates decent performance in whole-image categorization tasks. However, the BoF method disregards the information about the spatial layout of features, hence it is incapable of capturing shapes or locating an object. Motivated by, the SPM method partitions the image into increasingly finer spatial sub-regions and computes histograms of local features from each sub-region. Typically, $2^l$ x $2^l$ sub-regions, l = 0, 1, 2 are used. Other partitions such as 3 x 1 has also been attempted to incorporate domain knowledge for images with ¡°sky¡± on top and/or ¡°ground¡± on bottom. The resulted ¡°spatial pyramid¡± is a computationally efficient extension of the orderless BoF representation, and has shown very promising performance on many image classification tasks.
+\section{Description}
+A typical flowchart of the SPM approach based on BoF is illustrated on the left of Figure~\ref{fig:onecol}. First, feature points are detected or densely located on the input image, and descriptors such as ¡°SIFT¡± or ¡°color moment¡± are extracted from each feature point (highlighted in blue circle in Figure 1). This obtains the ¡°Descriptor¡± layer. Then, a codebook with M entries is applied to quantize each descriptor and generate the ¡°Code¡± layer, where each descriptor is converted into an RM code (highlighted in green circle). If hard vector quantization (VQ)is used, each code has only one non-zero element, while for soft-VQ, a small group of elements can be non-zero. Next in the ¡°SPM¡± layer, multiple codes from inside each sub-region are pooled together by averaging and normalizing into a histogram. Finally, the histograms from all sub-regions are concatenated together to generate the final representation of the image for classification.
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{linear.JPG}
+\end{center}
+ \caption{ Left: flowchart of the spatial pyramid structure for pooling features for image classification.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\section{Conclusion}
+The traditional SPM approach based on bag-of-features (BoF) requires nonlinear classifiers to achieve good image classification performance. This paper presents a simple but effective coding scheme called Locality-constrained Linear Coding (LLC) in place of the VQ coding in traditional SPM. LLC is easy to compute and gives superior image classification performance than many existing approaches. LLC applies locality constraint to select similar basis of local image descriptors from a codebook, and learns a linear combination weight of these basis to reconstruct each descriptor.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{22}
+}
+
+
+\end{document}
+
