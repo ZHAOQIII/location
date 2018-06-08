@@ -1,0 +1,60 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ImageNet~\cite{russakovsky2015imagenet} Classification with Deep Convolutional Neural Networks~\cite{simonyan2014very}}
+\author{Qi Zhao\\\\June 8, 2018}
+
+\maketitle
+\section{Introduction}
+Current approaches to object recognition make essential use of machine learning methods. To improve their performance, we can collect larger datasets, learn more powerful models, and use better techniques for preventing overfitting. For example, the current-best error rate on the MNIST~\cite{deng2012mnist} digit-recognition task (<0.3\%) approaches human performance. And the new larger datasets include LabelMe~\cite{russell2008labelme}, which consists of hundreds of thousands of fully-segmented images, and ImageNet, which consists of over 15 million labeled high-resolution images in over 22,000 categories. To learn about thousands of objects from millions of images, we need a model with a large learning capacity. Convolutional neural networks (CNNs)~\cite{kim2014convolutional} constitute one such class of models. Their capacity can be controlled by varying their depth and breadth, and they also make strong and mostly correct assumptions about the nature of images (namely, stationarity of statistics and locality of pixel dependencies). Thus, compared to standard feed forward neural networks with similarly-sized layers, CNNs have much fewer connections and parameters and so they are easier to train, while their theoretically-best performance is likely to be only slightly worse. Luckily, current GPUs, paired with a highly-optimized implementation of 2D convolution, are powerful enough to facilitate the training of interestingly-large CNNs, and recent datasets such as ImageNet contain enough labeled examples to train such models without severe overfitting.
+
+\section{Constructing ImageNet}
+\begin{small}
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccc}
+\hline
+Model&Top-1 &Top-5 \\
+\hline
+ Sparse coding & 47.1\% & 28.2\% \\
+\hline
+SIFT + FVs & 45.7\%& 25.7\% \\
+\hline
+CNN & 37.5\%& 17.0\%\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Comparison of results on ILSVRC-2010~\cite{kawano2014ilsvrc} test set. In italics are best results achieved by others.}
+\end{table}
+\end{small}
+ The results on ILSVRC-2010 are summarized in Table~\ref{fig:onecol}. And Figure~\ref{fig:onecol} shows the convolutional kernels learned by the network¡¯s two data-connected layers. The network has learned a variety of frequency- and orientation-selective kernels, as well as various colored blobs. Notice the specialization exhibited by the two GPUs, a result of the restricted connectivity described. The kernels on GPU 1 are largely color-agnostic, while the kernels on on GPU 2 are largely color-specific. This kind of specialization occurs during every run and is independent of any particular random weight initialization (modulo a renumbering of the GPUs). The neural network, which has 60 million parameters and 650,000 neurons, consists of five convolutional layers, some of which are followed by max-pooling layers, and three fully-connected layers with a final 1000-way softmax. To make training faster, it used non-saturating neurons and a very efficient GPU implementation of the convolution operation. To reduce overfitting in the fully-connected layers it employed a recently-developed regularization method called ¡°dropout¡± that proved to be very effective.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{network2.JPG}
+\end{center}
+ \caption{\textbf{(Left)} Eight ILSVRC-2010 test images and the five labels considered most probable by our model. The correct label is written under each image, and the probability assigned to the correct label is also shown with a red bar (if it happens to be in the top 5). \textbf{(Right)} Five ILSVRC-2010 test images in the first column. The remaining columns show the six training images that produce feature vectors in the last hidden layer with the smallest Euclidean distance from the feature vector for the test image.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{25}
+}
+
+
+\end{document}
+
