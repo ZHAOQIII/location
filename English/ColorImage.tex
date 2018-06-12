@@ -1,0 +1,82 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Color Image Watermarking Using Quaternion Fourier Transform~\cite{Guo2008Spatio}}
+\author{Qi Zhao\\\\June 12, 2018}
+
+\maketitle
+\section{Introduction}
+Color images have not received as much attention from the watermarking community as grey-level images~\cite{carlsson1988sketch}. One commonly used technique to address color images is to mark only the luminance component. Consequently for watermarking and especially data-hiding methods, it is important not to discard chrominance information because such a channel represents an interesting amount of data that can be used for information embedding. This paper presents a digital color image watermarking scheme using the hypercomplex numbers representation and the Quaternion Fourier Transform (QFT). Previous color image watermarking methods are first presented and the quaternion representation is then described. In this framework RGB pixel values are associated with an unique quaternion number having three imaginary parts. The QFT is presented, this transform depends on an arbitrary unit pure quaternion $\mu$. The value of $\mu$ is selected to provide embedding spaces having robustness and or perceptual properties. In the presented approach $\mu$ is function of the mean color value of a block and a perceptual component. A watermarking scheme based on the QFT and the Quantization Index Modulation scheme is afterwards presented. This scheme is finally evaluated for different color image filtering process (JPEG, blur) and the fact that perceptive QFT embedding can offer robustness to luminance filtering techniques is outlined.
+
+\section{Result}
+\begin{small}
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{cccc}
+\hline
+MAE & 5 & 10 & 20 \\
+\hline
+ $\mu$ = $\mu$$_{Perc¡¯}$: Ber(\%) & 10.44 & 4.73 & 1.09 \\
+$\mu$ = $\mu$$_{Lum}$: Ber(\%) & 29.54 & 20.04 & 13.45\\
+
+\hline
+\end{tabular}
+\end{center}
+\caption{ BER results for gaussian blurring.}
+\label{tab}
+\end{table}
+\end{small}
+\begin{small}
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{cccc}
+\hline
+MAE&5 &10&20 \\
+\hline
+ $\mu$ = $\mu$$_{Perc¡¯}$: Ber(\%) &50 &4.46 &0.12 \\
+$\mu$ = $\mu$$_{Lum}$: Ber(\%) & 0.26 &0.0 &0.0\\
+\hline
+\end{tabular}
+\end{center}
+\caption{ BER results for JPEG compression (Quality factor  = 85\%).}
+\label{tab1}
+\end{table}
+\end{small}
+The goal of this section is to argue the different advantages offered by the presented scheme in term of visual impact and robustness to distortions and a new watermarking/data-hiding technique for digital color images. The robustness was evaluated using the JPEG compression technique and a Gaussian blurring filter~\cite{marziliano2004perceptual}. The bit error rate (BER)~\cite{humblet1991bit} has been evaluated using either $\mu$ = $\mu$$_{Perc¡®}$ or $\mu$ = $\mu$$_{Lum}$ with equal Mean Absolute Error. The MAE was used because $L^1$ the norm produces values that are more conform to visual error than the norm (MSE). The different results are presented on Table~\ref{tab} and Table~\ref{tab1}. Nevertheless as it is shown in Figure~\ref{figb}, for a similar BER, the visual impact of the perceptual embedding scheme is less disturbing than the visual impact of the luminance embedding scheme.
+\begin{figure}[H]
+\centering
+\subfigure[]{
+\label{figa} %% label for first subfigure
+\includegraphics[width=0.19\textwidth]{Color.JPG}}
+\hspace{1in}\\
+\subfigure[]{
+\label{fig:subfig:b}
+\includegraphics[width=0.19\textwidth]{color1.JPG}}
+\caption{ Evaluation of the visual impact of the embedding process on marked images for similar robustness after JPEG compression with a quality factor of 85\%.}
+\label{figb}
+\end{figure}
+\par The Quaternion representation and the Quaternion Fourier Transform were used because a pixel value is processed without dissociating the different color. The construction of the QFT is associated with the choice of an unit pure quaternion ¦Ì that can be selected to induces an embedding space which is not perceptually affected by the signature embedding. Moreover the QFT has permitted the design of a robust watermarking scheme in the frequential domain. The proposed perceptual scheme is not robust to JPEG compression and is more suited for data-hiding applications. Future work will be devoted to embed signature both in perceptual and luminance components to provide similar robustness for luminance ?ltering and compression techniques.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{27}
+}
+
+
+\end{document}
+
