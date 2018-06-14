@@ -1,0 +1,51 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Guided Image Filtering}
+\author{Qi Zhao\\\\June 14, 2018}
+
+\maketitle
+\section{Introduction}
+In this paper, it proposes a novel type of explicit image filter - \emph{guided filter}~\cite{Yusuke2012Multispectral}. Derived from a local linear model, the guided filter generates the filtering output by considering the content of a guidance image, which can be the input image itself or another different image. The guided filter can perform as an edge-preserving smoothing operator like the popular bilateral filter~\cite{Barash2002Fundamental}, but has better behavior near the edges. It also has a theoretical connection with the matting Laplacian matrix~\cite{Trinajstic1994The}, so is a more generic concept than a smoothing operator and can better utilize the structures in the guidance image. Moreover, the guided filter has a fast and non-approximate linear-time algorithm, whose computational complexity is independent of the filtering kernel size. We demonstrate that the guided filter is both effective and efficient in a great variety of computer vision and computer graphics applications including noise reduction, detail smoothing/enhancement, HDR compression~\cite{Sun2008DHTC}, image matting/feathering, haze removal, and joint upsampling.
+
+\section{Description}
+It first defines a general linear translation-variant filtering process, which involves a guidance image I, an input image p, and an output image q. Both I and p are given beforehand according to the application, and they can be identical. The filtering output at a pixel i is expressed as a weighted average (in Eq.~\ref{fig:onecol}):
+\begin{align}
+q_i = \sum_{j}^{}W_{ij}(I)p_j
+\end{align}
+Where i and j are pixel indexes. The filter kernel W$_{ij}$ is a function of the guidance image I and independent of p. This filter is linear with respect to p.
+\par Next we apply the linear model to all local windows in the entire image. Some further computations show that j W$_{ij}$ (I) = 1. No extra effort is needed to normalize the weights. Figure~\ref{fig:onecol} shows two examples of the kernel shapes in real images. In the top row are the kernels near a step edge. Like the bilateral kernel, the guided filter¡¯s kernel assigns nearly zero weights to the pixels on the opposite side of the edge. In the bottom row are the kernels in a patch with small scale textures. Both filters average almost all the nearby pixels together and appear as low-pass filters~\cite{Hsieh2003Compact}.
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{guide.JPG}
+\end{center}
+ \caption{Filter kernels. Top: a step edge (guided filter: r = 7, $\zeta$ = $0.1^2$, bilateral filter: $\varepsilon$$_s$ = 7, $\varepsilon$$_r$ = 0.1). Bottom: a textured patch (guided filter: r = 8, $\zeta$ = $0.2^2$, bilateral filter: $\varepsilon$$_s$ = 8, $\varepsilon$$_r$ = 0.2). The kernels are centered at the pixels denote by the red dots.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\section{Conclusions}
+
+In this paper, it has presented a novel filter which is widely applicable in computer vision and graphics. Different from the recent trend towards accelerating the bilateral filter, it defines a new type of filter that shares the nice property of edge-preserving smoothing but can be computed efficiently and exactly. The filter is more generic and can handle some applications beyond the concept of ¡± smoothing ¡±.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{28}
+}
+
+
+\end{document}
+
