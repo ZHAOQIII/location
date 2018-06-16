@@ -1,0 +1,51 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Cubic Convolution Interpolation~\cite{meijering2003note} for Digital Image Processing}
+\author{Qi Zhao\\\\June 16, 2018}
+
+\maketitle
+\section{Introduction}
+Cubic convolution interpolation is a new technique for re-sampling discrete data. The cubic convolution interpolation function converges uniformly to the function being interpolated as the sampling increment approaches zero. With the appropriate boundary conditions and constraints on the interpolation kernel~\cite{hanssen1999evaluation}, it can be shown that the order of accuracy of the cubic convolution method is between that of linear interpolation~\cite{powell1994direct} and that of cubic splines. Interpolation is the process of estimating the intermediate values of a continuous event from discrete samples. Interpolation is used extensively in digital image processing to magnify or reduce images and to correct spatial distortions. Because of the amount of data associated with digital images, an efficient interpolation algorithm is essential. The algorithm discussed in this paper is a modified version of the cubic convolution algorithm developed by Rifman~\cite{Rifman1973Digital} and Bernstein~\cite{bernstein1976digital}. The objective of this paper is to derive the modified cubic convolution algorithm and to compare it with other interpolation methods.
+
+\section{Description}
+First, the analysis pertains exclusively to the one-dimensional problem; two-dimensional interpolation is easily accomplished by performing one-dimensional interpolation in each dimension. Second, the data samples are assumed to be equally spaced (In the two-dimensional case, the horizontal and, vertical sampling increments do not have to be the same).
+For equally spaced data, many interpolation functions can be written in the form.
+\begin{align}
+g(x) = \sum_k^{}c_ku(\frac{x-x_k}{h})
+\end{align}
+In Equation~\ref{fig:onecol}, and for the remainder of this paper, h represents the sampling increment, the $x_k$ 's are the interpolation nodes, u is the interpolation kernel, and g is the interpolation function. The $c_k$ 's are parameters which depend upon the sampled data. They are selected so that the interpolation condition,g($x_k$) = f($x_k$) for each $x_k$, is satisfied. Examples of some interpolation kernels which replace u in are shown in Figure~\ref{fig:onecol}.
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{interpolation.JPG}
+\end{center}
+ \caption{Interpolation kernels. (a)Nearest-neighbor. (b)Linear interpolation. (c)Cubic spline. (d)Cubic convolution.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\section{Conclusions}
+
+The cubic convolution interpolation function is more accurate than the nearest-neighbor algorithm or linear interpolation method. Although not as accurate as a cubic spline approximation, cubic convolution interpolation can be performed much more efficiently.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{29}
+}
+
+
+\end{document}
+
