@@ -1,0 +1,45 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Single Image Haze Removal Using Dark Channel Prior~\cite{xu2012fast}}
+\author{Qi Zhao\\\\June 18, 2018}
+
+\maketitle
+\section{Introduction}
+Images of outdoor scenes are usually degraded by the turbid medium (e.g., particles, water-droplets) in the atmosphere. Haze, fog, and smoke are such phenomena due to atmospheric absorption and scattering. The irradiance received by the camera from the scene point is attenuated along the line of sight. Furthermore, the incoming light is blended with the airlight~\cite{fang2014image} (ambient light reflected into the line of sight by atmospheric particles). The degraded images lose the contrast and color fidelity, as shown in Figure~\ref{fig:onecol}. Since the amount of scattering depends on the distances of the scene points from the camera, the degradation is spatial-variant. The paper proposes a simple but effective image prior-dark channel prior to remove haze from a single input image.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{dark.JPG}
+\end{center}
+\caption{ Haze removal using a single image. (a) input haze image. (b) image after haze removal by our approach. (c) our recovered depth map.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\section{Description}
+The dark channel prior is a kind of statistics of the haze-free outdoor images. It is based on a key observation-most local patches in haze-free outdoor images contain some pixels which have very low intensities in at least one color channel. Using this prior with the haze imaging model, we can directly estimate the thickness of the haze and recover a high quality haze-free image. Results on a variety of outdoor haze images demonstrate the power of the proposed prior. Moreover, a high quality depth map can also be obtained as a by-product of haze removal. The paper proposes a novel prior-dark channel prior, for single image haze removal. The dark channel prior is based on the statistics of haze-free outdoor images. It find that, in most of the local regions which do not cover the sky, it is very often that some pixels (called ¡±dark pixels¡±) have very low intensity in at least one color (rgb) channel. In the haze image, the intensity of these dark pixels in that channel is mainly contributed by the airlight. Therefore, these dark pixels can directly provide accurate estimation of the haze¡¯s transmission. Combining a haze imaging model and a soft matting interpolation method, it can recover a hi-quality haze-free image and produce a good depth map (up to a scale).
+\section{Conclusions}
+First, removing haze can significantly increase the visibility of the scene and correct the color shift caused by the airlight. In general, the haze-free image is more visually pleasing. Second, most computer vision algorithms, from low-level image analysis to high-level object recognition, usually assume that the input image (after radiometric calibration~\cite{chander2003revised}) is the scene radiance. The performance of vision algorithms (e.g., feature detection, filtering, and photometric analysis) will inevitably suffer from the biased, low-contrast scene radiance. Last, the haze removal can produce depth information and benefit many vision algorithms and advanced image editing. The approach is physically valid and is able to handle distant objects even in the heavy haze image. It does not rely on significant variance on transmission or surface shading in the input image. The result contains few halo artifacts.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{30}
+}
+
+
+\end{document}
+
