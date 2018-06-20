@@ -1,0 +1,51 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage[abs]{overpic}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Color Space}
+\author{Qi Zhao\\\\June 20, 2018}
+
+\maketitle
+\section{Introduction}
+The perception of color is of paramount importance to humans since they routinely use color features to sense the environment, recognize objects and convey information. With the advent of powerful desktop computers and the proliferation of image collection devices, such as digital cameras and scanners, color image processing~\cite{Ramanath2005Color} techniques are now within the grasp of the general public.
+
+\section{Description}
+Color is a sensation created in response to excitation of our visual system~\cite{Rizzolatti2003Two} by electromagnetic radiation~\cite{Van1985Electromagnetic} known as light. More specific, color is the perceptual result of light in the visible region of the electromagnetic spectrum~\cite{Reiter1992Alterations} of the Figure~\ref{fig:onecol}, having wavelengths in the region of 400nm to 700nm, incident up on the retina of the human eye. Physical power or radiance of the incident light is in a spectral power distribution (SPD)~\cite{Hoffman1985The}, often divided into 31 components each representing a 10nm band. The branch of color science concerned with the appropriate description and specification of a color is called colorimetry. Since there are exactly three types of color photo-receptor cone cells, three numerical components are necessary and sufficient to describe a color, providing that appropriate spectral weighting functions are used. Therefore, a color can be specified by a tri-component vector. The set of all colors form a vector space called color space or color model. The three components of a color can be defined in many different ways leading to various color spaces.
+\begin{figure}[H]
+  \centering
+  \begin{overpic}[width=3.35in]{colorspace1.JPG}
+ \put(35,1){\colorbox{white}{$700nm$}}
+  \put(100,1){\colorbox{white}{$600nm$}}
+  \put(150,1){\colorbox{white}{$500nm$}}
+  \put(200,1){\colorbox{white}{$400nm$}}
+  \setlength{\fboxsep}{10pt}
+   \end{overpic}
+\caption[]{The visible light spectrum.}
+\label{fig:onecol}
+\end{figure}
+
+\section{Conclusions}
+
+Visual sensitivity to small differences among colors is of paramount importance in color perception and specification experiments. A color system that is to b e used for color specification should be able to represent any color with high precision. All systems currently available for such tasks are based on the CIE XYZ color model~\cite{Ibraheem2012Understanding}. In image processing, it is of particular interest in a perceptually uniform color space where a small perturbation in a component value is approximately equally perceptible across the range of that value. The color specification systems discussed until now, such as the XYZ or RGB tristimulus values and the various RGB hardware oriented systems are far from uniform. A similar procedure is used by CIE to formulate the L*u*v* and L*a*b* spaces~\cite{Pinero2002Segmentation}. The linear RGB components are first transformed to CIE XYZ components using the appropriate matrix.
+{\small
+\bibliographystyle{ieee}
+\bibliography{31}
+}
+
+
+\end{document}
+
