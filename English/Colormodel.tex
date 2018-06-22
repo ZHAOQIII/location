@@ -1,0 +1,39 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage[abs]{overpic}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Color Model}
+\author{Qi Zhao\\\\June 22, 2018}
+
+\maketitle
+\section{Introduction}
+Color model can be found in the domain of modern sciences, such as physics, engineering, artificial intelligence, computer science, psychology and philosophy. In image processing applications, color models can alternatively be divided into three categories. Namely:\\
+1.~\textbf{Device-oriented color models}, which are associated with input, processing and output signal devices. Such spaces are of paramount importance in modern applications, where there is a need to specify color in a way that is compatible with the hardware tools used to provide, manipulate or receive the color signals.\\
+2.~\textbf{User-oriented color models}~\cite{Hu2015A}, which are utilized as a bridge between the human operators and the hardware used to manipulate the color information. Such models allow the user to specify color in terms of perceptual attributes and they can be considered an experimental approximation of the human perception of color.\\
+3.~\textbf{Device-independent color models}~\cite{Fairchild2010Considering}, which are used to specify color signals independently of the characteristics of a given device or application. Such models are of importance in applications, where color comparisons and transmission of visual information over networks connecting different hardware platforms are required.
+
+\section{Conclusions}
+
+In 1931, the Commission Internationale de L'Eclairage (CIE)~\cite{Robertson1977The} adopted standard color curves for a hypothetical standard observer. These color curves specify how a specific spectral power distribution (SPD)~\cite{Boyce2003The} of an external stimulus (visible radiant light incident on the eye) can be transformed into a set of three numbers that specify the color. The CIE color specification system is based on the description of color as the luminance component Y and two additional components X and Z. The XYZ model~\cite{GUSTAVO2008THERMAL} is a device independent color space that is useful in applications where consistent color representation across devices with different characteristics is important. Thus, it is exceptionally useful for color management purposes.
+{\small
+\bibliographystyle{ieee}
+\bibliography{32}
+}
+
+
+\end{document}
+
