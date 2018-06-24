@@ -1,0 +1,63 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Gamma Correction~\cite{Farid2001Blind}}
+\author{Qi Zhao\\\\June 24, 2018}
+
+\maketitle
+\section{Introduction}
+Recently, an international agreement has finally been reached on the primaries for the High Definition Television (HDTV)~\cite{Mertz1939High} specification. These primaries are representative of contemporary monitors in computing, computer graphics and studio video production. The standard is known as ITU-RBT.709~\cite{Susstrunk2001Chromatic} and its primaries along with the D65 reference white are defined in Table~\ref{fig:onecol}. The different RGB systems~\cite{Kim2013Depth} can be converted amongst each other using a linear transformation assuming that the white references values being used are known. The conversion should be carried out in the linear voltage domain, where the pixel values must first be converted into linear voltages. This is achieved by applying the so-called gamma correction.
+\begin{small}
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ccccc}
+\hline
+Colorimetry &Red & Green &Blue&White D65 \\
+\hline
+ x & 0.640&0.300& 0.150&0.3127\\
+
+y & 0.330&0.600&0.060&0.3290 \\
+
+z & 0.030&0.100&0.790&0.3582\\
+\hline
+\end{tabular}
+\end{center}
+\caption{EBU Tech 3213 Primaries.}
+\end{table}
+\end{small}
+
+\section{Description}
+In image processing, computer graphics, digital video and photography, the symbol $\gamma$ represents a numerical parameter which describes the nonlinearity of the intensity reproduction. The cathode-ray tube (CRT)~\cite{Gould1984Doing} employed in modern computing systems is nonlinear in the sense that the intensity of light reproduced at the screen of a CRT monitor is a nonlinear function of the voltage input. A CRT has a power law response to applied voltage. The light intensity produced on the display is proportional to the applied voltage raised to a power denoted by $\gamma$. Thus, the produced intensity by the CRT and the voltage applied on the CRT have the following relationship in Equation~\ref{fig:onecol}:
+\begin{align}
+I_{int} = (v')^{\gamma}
+\label{fig:onecol}
+\end{align}
+\par The relationship which is called the `five-halves' power law is dictated by the physics of the CRT electron gun. The above function applies to a single electron gun of a gray-scale CRT or each of the three red, green and blue electron guns of a color CRT. The functions associated with the three guns on a color CRT are very similar to each other but not necessarily identical. The actual value of $\gamma$ for a particular CRT may range from about 2.3 to 2.6 although most practitioners frequently claim values lower than 2.2 for video monitors.
+\par The process of pre-computing for the nonlinearity by computing a voltage signal from an intensity value is called gamma correction. The function required is approximately a 0:45 power function. In image processing applications, gamma correction is accomplished by analog circuits at the camera. In computer graphics, gamma correction is usually accomplished by incorporating the function into a frame buffer lookup table~\cite{Wan1990Variance}. Although in image processing systems gamma was originally used to refer to the nonlinearity of the CRT, it is generalized to refer to the nonlinearity of an entire image processing system. The $\gamma$ value of an image or an image processing system can be calculated by multiplying the $\gamma$'s of its individual components from the image capture stage to the display.
+
+\section{Conclusions}
+
+In summary, pixel values alone cannot specify the actual color. The gamma correction value used for capturing or generating the color image is needed. Thus, two images which have been captured with two cameras operating under different gamma correction values will represent colors differently even if the same primaries and the same white reference point are used.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{33}
+}
+
+
+\end{document}
+
