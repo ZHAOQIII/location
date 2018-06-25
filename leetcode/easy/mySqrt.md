@@ -16,7 +16,7 @@ public:
     
       for(i=0;i<n;i++)
       {
-        if(i==0||i==1)a[i]=i+1;
+        if(i==0||i==1) a[i]=i+1;
           else a[i]=a[i-1]+a[i-2];
       }
         return a[i-1];
