@@ -1,0 +1,81 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage[abs]{overpic}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Linear and Non-linear RGB Color Spaces~\cite{Funt2008Optimal}}
+\author{Qi Zhao\\\\June 26, 2018}
+
+\maketitle
+\section{Introduction}
+The image processing literature rarely discriminates between linear RGB and non-linear (R¡¯G¡¯B¡¯) gamma corrected values. For example, in the JPEG and MPEG~\cite{Moccagatta2002Error} standards and in image filtering, non-linear RGB (R¡¯G¡¯B¡¯) color values are implicit. Unacceptable results are obtained when JPEG or MPEG schemes are applied to linear RGB image data. On the other hand, in computer graphics, linear RGB values are implicitly used. Therefore, it is very important to understand the difference between linear and non-linear RGB values.
+
+\section{Description}
+\textbf{Linear RGB Color Space}. The linear R value is proportional to the intensity of the physical power that is radiated from an object around the 700nm band of the visible spectrum. Similarly, a linear G value corresponds to the 546.1nm band and a linear B value corresponds to the 435.8nm band. As a result the linear RGB space is device independent and used in some color management systems to achieve color consistency across diverse devices.
+\par The linear RGB values in the range [0, 1] can be converted to the corresponding CIE XYZ~\cite{Zhang2017Estimating} values in the range [0, 1] using the following matrix transformation in Equation~\ref{fig:onecol}:
+\begin{equation}
+\left[
+\begin{array}{c}
+x\\y\\z\\\end{array} \right] = \left[\begin{array}{ccc} 0.4125 &0.3576 &0.1904\\0.2127& 0.7152 &0.0722\\0.0193 &0.1192 &0.9502\\
+\end{array} \right]
+\left[ \begin{array}{c}R\\G\\B\\\end{array} \right]
+\label{fig:onecol}
+\end{equation}
+
+\textbf{Non-linear RGB Color Space}. When an image acquisition system, such as a video camera, is used to capture the image of an object, the camera is exposed to the linear light radiated from the object. The linear RGB intensities incident on the camera are transformed to non-linear RGB signals using gamma correction~\cite{Farid2001Blind}. The transformation to non-linear R0G0B0values in the range [0, 1] from linear RGB values in the range [0, 1] is defined in Equation~\ref{fig:short}:
+\begin{equation}
+\begin{aligned}
+\begin{split}
+R' =
+\begin{cases}
+4.5R,& if~ R \leq 0.018\\
+1.099R^{\frac 1\gamma_c}-0.099,&otherwise\\
+\end{cases}\\
+G' =
+\begin{cases}
+4.5G,& if~ G \leq 0.018\\
+1.099G^{\frac 1\gamma_c}-0.099,&otherwise
+\end{cases}\\
+B' =
+\begin{cases}
+4.5B,& if~ B \leq 0.018\\
+1.099B^{\frac 1\gamma_c}-0.099,&otherwise
+\end{cases}
+\end{split}
+\label{fig:short}
+\end{aligned}
+\end{equation}
+\par where $\gamma_C$ is known as the gamma factor of the camera or the acquisition device. The value of $\gamma_C$ that is commonly used in video cameras is $1 \over 0.45$ ( $\approx 2.22$). The above transformation is graphically depicted in Figure~\ref{fig:onecol}. The linear segment near low intensities minimizes the effect of sensor noise in practical cameras and scanners.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{RGB.JPG}
+\end{center}
+ \caption{Linear to non-linear light transformation.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+
+\section{Conclusions}
+The linear RGB values are a physical representation of the chromatic light radiated from an object. However, the perceptual response of the human visual system to radiate red, green, and blue intensities is non-linear and more complex. The linear RGB space is, perceptually, highly non-uniform and not suitable for numerical analysis of the perceptual attributes. Thus, the linear RGB values are very rarely used to represent an image. On the contrary, non-linear R0G0B0values are traditionally used in image processing applications such as filtering.
+{\small
+\bibliographystyle{ieee}
+\bibliography{34}
+}
+
+
+\end{document}
+
