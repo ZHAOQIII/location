@@ -1,0 +1,48 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage[abs]{overpic}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{The YIQ~\cite{Ahirwal2008FPGA} Color Space}
+\author{Qi Zhao\\\\June 28, 2018}
+
+\maketitle
+\section{Introduction}
+The YIQ color specification system, used in commercial color TV broadcasting and video systems, is based upon the color television standard that was adopted in the 1950s by the National Television Standard committee (NTSC)~\cite{Smith2002A}. Basically, YIQ is a recording of non-linear R0G0B0 for transmission efficiency and for maintaining compatibility with monochrome TV standards. In fact, the Y component of the YIQ system provides all the video information required by a monochrome television system.
+
+\section{Description}
+The YIQ model was designed to take advantage of the human visual system's greater sensitivity to change in luminance than to changes in hue or saturation. It is useful in a video system to specify a color with a component representative of luminance Y and two other components: the in-phase I, an orange-cyan axis, and the quadrature Q component, the magenta-green axis. The two chrominance components are used to jointly represent hue and saturation. With this model, it is possible to convey the component representative of luminance Y in such a way that noise (or quantization) introduced in transmission, processing and storage is minimal and has a perceptually similar effect across the entire tone scale from black to white. This is done by allowing more bandwidth (bits) to code the luminance (Y) and less band-width (bits) to code the chrominance (I and Q) for efficient transmission and storage purposes without introducing large perceptual errors due to quantization. Another implication is that the luminance (Y) component of an image can be processed without affecting its chrominance (color content). For instance, histogram equalization~\cite{Pizer1987Adaptive} to a color image represented in YIQ format can be done simply by applying histogram equalization to its Y component.
+\par The ideal way to accomplish these goals would b e to form a luminance component (Y) by applying a matrix transform to the linear RGB~\cite{Finlayson2002Optimization} components and then subjecting the luminance (Y) to a non-linear transfer function to achieve a component similar to lightness L*.  First, gamma correction is applied to each of the linear RGB. Then, a weighted sum of the nonlinear components is computed to form a component representative of luminance Y. The nonlinear RGB to YIQ conversion is defined by the following matrix transformation:
+
+\begin{equation}
+\left[
+\begin{array}{c}
+Y\\I\\Q\\\end{array} \right] = \left[\begin{array}{ccc} 0.299 &0.587 &0.114\\0.596& -0.275 &-0.321\\0.212 &-0.523 &0.311\\
+\end{array} \right]
+\left[ \begin{array}{c}R'\\G'\\B'\\\end{array} \right]
+\label{fig:onecol}
+\end{equation}
+
+\section{Conclusions}
+As described it, the YIQ model is developed from a perceptual point of view and provides several advantages in image coding and communications applications by decoupling the luma (Y) and chrominance components (I and Q). Nevertheless, YIQ is a perceptually non-uniform color space and thus not appropriate for perceptual color difference quantification.
+{\small
+\bibliographystyle{ieee}
+\bibliography{35}
+}
+
+
+\end{document}
+
