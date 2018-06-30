@@ -1,0 +1,48 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{The HSI Family~\cite{ibraheem2012understanding} of Color Models}
+\author{Qi Zhao\\\\June 30, 2018}
+
+\maketitle
+\section{Introduction}
+In image processing systems, it is often convenient to specify colors in a way that is compatible with the hardware used. The different variants of the RGB monitor~\cite{smith1978color} model address that need. Although these systems are computationally practical, they are not useful for user specification and recognition of colors. The user cannot easily specify a desired color in the RGB model. On the other hand, perceptual features, such as perceived luminance (intensity), saturation and hue correlate well with the human perception of color. Therefore, a color model in which these color attributes form the basis of the space is preferable from the users point of view. Models based on lightness, hue and saturation are considered to be better suited for human interaction. The analysis of the user-oriented color spaces starts by introducing the family of intensity, hue and saturation (HSI) models. This family of models is used primarily in computer graphics to specify colors using the artistic notion of tints, shades and tones. However, all the HSI models are derived from the RGB color space by coordinate transformations.
+
+\section{Description}
+The HSI family of color models use approximately cylindrical coordinates. The saturation (S) is proportional to radial distance~\cite{davis1999radial}, and the hue (H) is a function of the angle in the polar coordinate system~\cite{tanaka1977representation}. The intensity (I) or lightness (L) is the distance along the axis perpendicular to the polar coordinate plane. The dominant factor in selecting a particular HSI model is the definition of the lightness, which determines the constant-lightness surfaces, and thus, the shape of the color solid that represents the model. In the cylindrical models, the set of color pixels in the RGB cube which are assigned a common lightness value (L) form a constant-lightness surface. Any line parallel to the main diagonal of the color RGB cube meets the constant-lightness surface at most in one point.
+
+\par The HSI color space was developed to specify, numerically, the values of hue, saturation, and intensity of a color. The HSI color model is depicted in Figure~\ref{fig:onecol}. The hue (H) is measured by the angle around the vertical axis and has a range of values between 0 and 360 degrees beginning with red at $0^{\circ}$. It gives a measure of the spectral composition of a color. The saturation (S) is a ratio that ranges from 0 (i.e. on the I axis), extending radially outwards to a maximum value of 1 on the surface of the cone. This component refers to the proportion of pure light of the dominant wavelength and indicates how far a color is from a gray of equal brightness. The intensity (I) also ranges between 0 and 1 and is a measure of the relative brightness. At the top and bottom of the cone, where I = 0 and 1 respectively, H and S are undefined and meaningless. At any point along the I axis the Saturation component is zero and the hue is undefined. This singularity occurs whenever R = G = B.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.5\linewidth]{HSI.JPG}
+\end{center}
+ \caption{The HSI color space.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\section{Conclusions}
+The HSI color model owes its usefulness to two principal facts. First, like in the YIQ model~\cite{kohda2000digital}, the intensity component I is decoupled from the chrominance information represented as hue H and saturation S. Second, the hue (H) and saturation (S) components are intimately related to the way in which humans perceive chrominance. Hence, these features make the HSI an ideal color model for image processing applications where the chrominance is of importance rather than the overall color perception (which is determined by both luminance and chrominance). But the HSI model is useful in some image processing applications, the formulation of it is flawed with respect to the properties of color vision. The usual formulation makes no clear reference to the linearity or non-linearity of the underlying RGB and to the lightness perception of human vision.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{36}
+}
+
+
+\end{document}
+
