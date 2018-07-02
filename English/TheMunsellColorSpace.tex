@@ -1,0 +1,47 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{The Munsell Color Space~\cite{Nickerson1940History}}
+\author{Qi Zhao\\\\July 1, 2018}
+
+\maketitle
+\section{Introduction}
+The Munsell color space represents the earliest attempt to organize color perception into a color space. The Munsell space is defined as a comparative reference for artists. Its general shape is that of a cylindrical representation with three dimensions roughly corresponding to the perceived lightness, hue and saturation. However, contrary to the HSV~\cite{Cucchiara2002Improving} or HSI~\cite{Sun2006HSI} color models where the color solids were parameterized by hue, saturation and perceived lightness, the Munsell space uses the method of the color atlas, where the perception attributes are used for sampling.
+
+\section{Description}
+The fundamental principle behind the Munsell color space is that of equality of visual spacing between each of the three attributes. Hue is scaled according to some uniquely identifiable color. It is represented by a circular band divided into ten sections. The sections are defined as red, yellow-red, yellow, green-yellow, green, blue-green, blue, purple-blue, purple and red-purple. Each section can be further divided into ten subsections if finer divisions of hue are necessary. A chromatic hue is described according to its resemblance to one or two adjacent hues. Value in the Munsell color space refers to a color's lightness or darkness and is divided into eleven sections numbered zero to ten. Value zero represents black while a value of ten represent white. The chroma defines the color's strength. It is measured in numbered steps starting at one with weak colors having low chroma values. The maximum possible chroma depends on the hue and the value being used. As can be seen in Figure~\ref{fig:onecol}, the vertical axis of the Munsell color solid is the line of V values ranging from black to white. Hue changes along each of the circles perpendicular to the vertical axis. Finally, chroma starts at zero on the V axis and changes along the radius of each circle. 
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{Munsell.JPG}
+\end{center}
+ \caption{The Munsell color system.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\par The Munsell space is comprised of a set of 1200 color chips each assigned a unique hue, value and chroma component. These chips are grouped in such a way that they form a three dimensional solid, which resembles a warped sphere. There are different editions of the basic Munsell book of colors, with different finishes (glossy or matte), different sample sizes and a different number of samples. The glossy finish collection displays color point chips arranged on 40 constant-hue charts. On each constant-hue chart the chips are arranged in rows and columns. In this edition the colors progress from light at the top of each chart to very dark at the bottom by steps which are intended to be perceptually equal. They also progress from achromatic colors~\cite{Wallach1948Brightness}, such as white and gray at the inside edge of the chart, to chromatic colors at the outside edge of the chart by steps that are also intended to be perceptually equal. All the charts together make up the color atlas, which is the color solid of the Munsell system.
+
+
+\section{Conclusions}
+In summary, the Munsell color system is an attempt to define color in terms of hue, chroma and lightness parameters based on subjective observations rather than direct measurements or controlled perceptual experiments. Although it has been found that the Munsell space is not as perceptually uniform as originally claimed and, despite the fact that it cannot directly integrate with additive color schemes, it is still in use today despite attempts to introduce colorimetric models for its replacement.
+{\small
+\bibliographystyle{ieee}
+\bibliography{37}
+}
+
+
+\end{document}
+
