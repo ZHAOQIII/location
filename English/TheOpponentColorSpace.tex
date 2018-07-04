@@ -1,0 +1,60 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{The Opponent~\cite{Waxman1997Color} Color Space}
+\author{Qi Zhao\\\\July 4, 2018}
+
+\maketitle
+\section{Introduction}
+The opponent color space family is a set of physiologically motivated~\cite{Broussard1999Physiologically} color spaces inspired by the physiology of the human visual system~\cite{Thorpe1996Speed}. According to the theory of color vision discussed in the human vision system can be expressed in terms of opponent hues, yellow and blue on one hand and green and red on the other, which cancel each other when superimposed. In  an experimental procedure was developed which allowed researchers to quantitatively express the amounts of each of the basic hues present in any spectral stimulus. The color model of suggests the transformation of the RGB `cone' signals to three channels in Figure~\ref{fig:onecol}, one achromatic channel (I) and two opponent color channels (RG, YB) according to in Equation~\ref{fig:onecol}:
+\begin{equation}
+\begin{split}
+RG = R-G \\
+ YB = 2B-R-G \\
+ I = R+G+B
+ \end{split}
+ \label{fig:onecol}
+\end{equation}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{opponent.JPG}
+\end{center}
+ \caption{The opponent color stage of the human visual system.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+\par At the same time a set of effective color features was derived by systematic experiments of region segmentation. According to the segmentation procedure of the color which has the deep valleys on its histogram and has the largest discriminant power~\cite{El1997Objective} to separate the color clusters in a given region need not be the R, G, and B color features. Since a feature is said to have large discriminant power if its variance is large, color features with large discriminant power were derived by utilizing the Karhunen-Loeve (KL) transformation. At every step of segmenting a region, calculation of the new color features is done for the pixels in that region by the KL transform of R , G, and B signals. Based on extensive experiments, it was concluded that three color features constitute an effective set of features for segmenting color images in Equation~\ref{fig:short}:
+\begin{flalign}
+\begin{split}
+I1 = \frac{(R+G+B)}{3} \\
+I2 = (R-B) \\
+I3 = \frac{(2G-R-B)}{2}
+ \end{split}
+ \label{fig:short}
+\end{flalign}
+\section{Conclusions}
+In the opponent color space hue could be coded in a circular format ranging through blue, green, yellow, red and black to white. Saturation is defined as distance from the hue circle~\cite{Mccamy2010The} making hue and saturation speciable with in color categories. Therefore, although opponent representation are often thought as a linear transforms of RGB space, the opponent representation is much more suitable for modeling perceived color than RGB is.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{38}
+}
+
+
+\end{document}
+
