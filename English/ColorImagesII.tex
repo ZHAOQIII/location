@@ -1,0 +1,43 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ Color Images}
+\author{Qi Zhao\\\\July 5, 2018}
+
+\maketitle
+\section{Introduction}
+Color imaging systems are used to capture and reproduce the scenes that humans see. Imaging systems can be built using a variety of optical, electronic or chemical components. However, all of them perform three basic operations, namely: (i) image capture, (ii) signal processing, and (iii) image formation. Color-imaging devices exploit the trichromatic theory~\cite{Walters1942Some} of color to regulate how much light from the three primary colors is absorbed or reflected to produce a desired color.
+
+\section{Description}
+There are a number of ways to acquiring and reproducing color images, including but not limited to:
+\par \textbf{Photographic film}. The film which is used by conventional cameras contains three emulation layers~\cite{Papanastasiou2010Bridging}, which are sensitive to red and blue light, which enters through the camera lens.
+\par\textbf{Digital cameras}. Digital cameras use a CCD~\cite{Healey2002Radiometric} to capture image information. Color information is captured by placing red, green and blue filters before the CCD and storing the response to each channel.
+\par\textbf{Cathode-Ray tubes}. CRTs~\cite{Molahosseini2010Efficient} are the display device used in televisions and computer monitors. They utilize a extremely fine array of phosphors that emit red, green and blue light at intensities governed by an electron gun, in accordance to an image signal. Due to the close proximity of the phosphors and the spatial filtering characteristics of the human eye, the emitted primary colors are mixed together producing an overall color.
+\par\textbf{Image scanners}. The most common method of scanning color images is the utilization of three CCD's each with a filter to capture red, green and blue light reflectance. These three images are then merged to create a copy of the scanned image.
+\par\textbf{Color printers}. Color printers are the most common method of attaining a printed copy of a captured color image. Although the trichromatic theory is still implemented, color in this domain is subtractive. The primaries which are used are usually cyan, magenta and yellow. The amount of the three primaries which appear on the printed media govern how much light is reflected.
+
+\section{Conclusions}
+ In each one of them the actual color is reconstructed by combining the basis elements of the vector spaces~\cite{Mackey2006Vector}, the so called primary colors. By defining different primary colors for the representation of the system different color models can be devised. Each color model comes into existence for a specific application in color image processing. Unfortunately, there is no technique for determining the optimum coordinate model~\cite{Bleck1992Salinity} for all image processing applications. For a specific application the choice of a color model depends on the properties of the model and the design characteristics of the application.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{39}
+}
+
+
+\end{document}
+
