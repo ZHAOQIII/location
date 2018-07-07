@@ -1,0 +1,88 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{outline} \usepackage{pmgraph} \usepackage[normalem]{ulem}
+\usepackage{graphicx} \usepackage{verbatim}
+% \usepackage{minted} % need `-shell-escape' argument for local compile
+
+\title{
+    \vspace*{1in}
+    \includegraphics[width=2.75in]{logo.JPG} \\
+    \vspace*{1.2in}
+    \textbf{\huge Deep Learning}
+    \vspace{0.2in}
+}
+
+\author{Qi Zhao  \\
+    \vspace*{0.5in} \\
+    \textbf{VISION@OUC} \\
+    \vspace*{1in}
+}
+
+\date{\today}
+
+
+\begin{document}
+
+\maketitle
+\newpage
+
+
+\section{Neural Networks}
+ There is a simple neural network example helping understand the concept of neural networks that given data about the size of houses on the real estate market and you want to fit a function that will predict their price in Figure~\ref{fig:onecol}. When the price of a house can be affected by other features such as size, number of bedrooms, zip code and wealth in Figure~\ref{fig:short}, the role of the neural network is to predicted the price and it will automatically generate the hidden units. It is multiple neural network, which is stacked with single neural networks.
+\begin{figure}[hb]
+    \centering
+    \includegraphics{price.JPG}
+    \caption{Housing price prediction with the size of houses.}
+    \label{fig:onecol}
+\end{figure}
+\begin{figure}[hb]
+    \centering
+    \includegraphics{price1.JPG}
+    \caption{Housing price prediction with other features.}
+    \label{fig:short}
+\end{figure}
+\section{Supervised Learning}
+
+In supervised learning, Supervised learning problems are categorized into "regression" and "classification" problems. In a regression problem, it is trying to predict results within a continuous output, meaning that we are trying to map input variables to some continuous function. In a classification problem, it is instead trying to predict results in a discrete output. In other words, we are trying to map input variables into discrete categories. Here are some examples of supervised learning in table~\ref{tab:result}.
+\begin{table}[hb]
+    \centering
+    \begin{tabular}{ccc}
+        \hline \\
+        Input(x) & Output(y) & Application \\
+        \hline \\
+        Home features & Price& Real Estate \\
+        Ad,user info&Click on ad?(0/1)&Online Advertising\\
+        Image& Object(1,...,1000)& Photo tagging\\
+        Audio&Text transcript&Speech recognition\\
+        English &Chinese &Machine translation\\
+        Image, Radar info&Position of other cars&Autonomous driving\\
+        \hline
+    \end{tabular}
+    \caption{ The examples of supervised learning.}
+    \label{tab:result}
+\end{table}
+There are different types of neural network, for example Convolution Neural Network (CNN) used often for image application and Recurrent Neural Network (RNN) used for one-dimensional sequence data such as translating English to Chinses or a temporal component such as text transcript. As for the autonomous driving, it is a hybrid neural network architecture in Figure~\ref{fig:three} .
+\begin{figure}[hb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{CNN.JPG}
+    \caption{Neural networks examples.}
+    \label{fig:three}
+\end{figure}
+\section{Why is deep learning taking off?}
+Deep learning is taking off due to a large amount of data available through the digitization of the society, faster computation and innovation in the development of neural network algorithm. There are two things in Figure~\ref{fig:two} have to be considered to get to the high level of performance: (i) Being able to train a big enough neural network. (ii) Huge amount of labeled data.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{scale.JPG}
+    \caption{Scale drives deep learning progress.}
+    \label{fig:two}
+\end{figure}
+% If you don't cite any references, please comment the following two lines
+\end {document}
