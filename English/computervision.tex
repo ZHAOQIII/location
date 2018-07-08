@@ -1,0 +1,45 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{The Application of Computer Vision~\cite{Andrew2004Multiple}}
+\author{Qi Zhao\\\\July 8, 2018}
+
+\maketitle
+\section{Introduction}
+The goal of computer vision is to extract useful information from images. Although it has occupied thousands of intelligent and creative minds over the last four decades, it is still far from being able to build a general-purpose ¡°seeing machine.¡± Part of the problem of computer vision is the complexity of visual data~\cite{Ferreira2003From}. Consider the image in Figure~\ref{fig:onecol}. There are hundreds of objects in the scene. Almost none of these are presented in a ¡°typical¡± pose. Almost all of them are partially occluded. For a computer vision algorithm, it is not even easy to establish where one object ends and another begins. For example, there is almost no change in the image intensity at the boundary between the sky and the white building in the background. However, there is a pronounced change in intensity on the back window of the SUV in the foreground, although there is no object boundary or change in material here. As Szeliski~\cite{Szeliski2010Computer} (2010) puts it, ¡°It may be many years before computers can name and outline all of the objects in a photograph with the same skill as a two year old child.¡±
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{vision.JPG}
+\end{center}
+ \caption{ A visual scene containing many objects, almost all of which are partially occluded. The red circle indicates a part of the scene where there
+is almost no brightness change to indicate the boundary between the sky and the building. The green circle indicates a region in which there is a large intensity change but this is due to irrelevant lighting effects; there is no object boundary or change in the object material here.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+\section{Conclusions}
+
+Nonetheless, there has been remarkable recent progress in our understanding of computer vision, and the last decade has seen the first large scale deployments of consumer computer vision~\cite{Fossati2012Consumer} technology. For example, most digital cameras now have embedded algorithms for face detection, and at the time of writing the Microsoft Kinect~\cite{Zhang2012Microsoft} (a peripheral that allows real-time tracking of the human body) holds the Guinness World Record for being the fastest-selling consumer electronics device ever. There are a number of reasons for the rapid recent progress in computer vision. The most obvious is that the processing power, memory, and storage capacity of computers has vastly increased. Another reason for the recent progress in this area has been the increased use of machine learning. And it is likely that artificial vision will become increasingly prevalent in the next decade.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{40}
+}
+
+
+\end{document}
+
