@@ -1,0 +1,55 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ Random Variables~\cite{Hoeffding2004Probability}}
+\author{Qi Zhao\\\\July 10, 2018}
+
+\maketitle
+\section{Introduction}
+A random variable x denotes a quantity that is uncertain. The variable may denote the result of an experiment (e.g., flipping a coin) or a real-world measurement of a fluctuating property (e.g., measuring the temperature). It might take a different value on each occasion. However, some values may occur more often than others. This information is captured by the probability distribution Pr(x)~\cite{Gazor2003Speech} of the random variable.
+A random variable may be discrete or continuous. A discrete variable takes values from a predefined set. This set may be ordered (the outcomes 1¨C6 of rolling a die) or unordered (the outcomes ¡°sunny,¡± ¡°raining,¡± ¡°snowing,¡± upon observing the weather). It may be finite (there are 52 possible outcomes of drawing a card randomly from a standard pack) or infinite (the number of people on the next train is theoretically unbounded). The probability distribution of a discrete variable can be visualized as a histogram~\cite{Borenstein2002The} or a Hinton diagram~\cite{despagne1998variable} (see Figure~\ref{fig:onecol}). Each outcome has a positive probability associated with it and the sum of the probabilities for all outcomes is always one.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.95\linewidth]{random.JPG}
+\end{center}
+ \caption{Two different representations for discrete probabilities a) A bar graph representing the probability that a biased six-sided die lands on each
+face. The height of the bar represents the probability: the sum of all heights is one. b) A Hinton diagram illustrating the probability of observing different
+weather types in England. The area of the square represents the probability, so the sum of all areas is one.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+\section{Conclusions}
+Continuous random variables take values that are real numbers. These may be finite or infinite. Infinite continuous variables may be defined on the whole real range or may be bounded above or below. The probability distribution of a continuous variable can be visualized by plotting the probability density function (pdf). The probability density for an outcome represents the relative propensity of the random variable to take that value (see Figure~\ref{fig:short}). It may take any positive value. However, the integral of the pdf always sums to one. And it is the basic of subsequent algorithms, such as Monte Carlo algorithm~\cite{lee1993new} and Las Vegas algorithm~\cite{clarkson1989fast}.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{random1.JPG}
+\end{center}
+ \caption{ Continuous probability distribution (probability density function or pdf for short) for time taken to complete a test. Note that the probability
+density can exceed one, but the area under the curve must always have unit area.}
+\label{fig:long}
+\label{fig:short}
+\end{figure}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{41}
+}
+
+
+\end{document}
+
