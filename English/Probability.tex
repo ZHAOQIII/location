@@ -1,0 +1,58 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ Probability~\cite{Snell1968Convergence}}
+\author{Qi Zhao\\\\July 12, 2018}
+
+\maketitle
+\section{Joint Probability~\cite{carsel1988developing}}
+Consider two random variables, x and y. A joint probability distribution may relate variables that are all discrete or all continuous, or it may relate discrete variables to continuous ones (see Figure ~\ref{fig:onecol}). This information is encompassed in the joint probability distribution of x and y, which is written as Pr(x,y). The comma in Pr(x,y) can be read as the English word ¡°and¡± so Pr(x,y) is the probability of x and y. And it writes Pr(x,y,z) to represent the joint probability distribution of scalar variables x,y, and z or writes Pr(x) to represent the joint probability of all of the elements of the multidimensional variable x =$ [x_1 ,x_2 ,...,x_K ] ^T $. Finally, we will write Pr(x,y) to represent the joint distribution of all of the elements from multidimensional variables~\cite{li2010second} x and y. Regardless, the total probability of all outcomes (summing over discrete variables and integrating over continuous ones) is always one.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{joint.JPG}
+\end{center}
+ \caption{Joint probability distributions between variables x and y. a-c) The same joint pdf of two continuous variables represented as a surface, contour plot, and image, respectively. d) Joint distribution of two discrete variables represented as a 2D Hinton diagram. e) Joint distribution of a continuous variable x and discrete variable y. f) Joint distribution of a discrete variable x and continuous variable y.}
+\label{fig:long}
+\label{fig:onecol}
+\end{figure}
+
+\section{Marginalization~\cite{strauss2003social}}
+ It can be recovered the probability distribution of any single variable from a joint distribution by summing (discrete case) or integrating (continuous case) over all the other variables (Figure~\ref{fig:short}). And the distributions Pr(x) and Pr(y) using the relations in Equation~\ref{fig:onecol} are recovered:
+ \begin{equation}
+\begin{split}
+Pr(x) = \int Pr(x,y)dy \\
+Pr(y) = \int Pr(x,y)dx
+ \end{split}
+ \label{fig:onecol}
+\end{equation}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.8\linewidth]{joint1.JPG}
+\end{center}
+ \caption{ Joint and marginal probability distributions. The marginal probability Pr(x)is found by summing over all values of y (discrete case) or integrating over y (continuous case) in the joint distribution Pr(x,y). Similarly, the marginal probability Pr(y) is found by summing or integrating over x. Note that the plots for the marginal distributions have different scales from those for the joint distribution (on the same scale, the marginals would look larger as they sum all of the mass from one direction). a) Both x and y are continuous. b) Both x and y are discrete. c) The random variable x is continuous and the variable y is discrete.}
+\label{fig:long}
+\label{fig:short}
+\end{figure}
+In general, it can be recovered the joint probability of any subset of variables, by marginalizing over all of the others.
+{\small
+\bibliographystyle{ieee}
+\bibliography{42}
+}
+
+
+\end{document}
+
