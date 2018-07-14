@@ -1,0 +1,90 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{array}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+    \usepackage[T1]{fontenc}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Common Probability Distributions}
+\author{Qi Zhao\\\\July 14, 2018}
+
+\maketitle
+\section{Introduction}
+For a view of probability from a machine learning perspective, there is one remaining important concept related to probability, which is conditional independence. The rules of probability are remarkably compact and simple. The concepts of marginalization~\cite{strauss2003social}, joint~\cite{fine1982hidden} and conditional probability~\cite{aslin1998computation}, independence, and Bayes¡¯ rule~\cite{waller1969bayes} will underpin many machine vision algorithms.
+
+
+\section{Description}
+To use these abstract rules for manipulating probabilities it will need to define some probability distributions. The choice of distribution Pr(x) that it use will depend on the domain of the data x that it are modeling (table~\ref{tab:onecol}).
+\begin{small}
+\begin{table}[hbtp]
+\begin{center}
+
+\begin{tabular}{|p{2.5cm}<{\centering}| p{3.5cm}<{\centering}| p{2cm}<{\centering}|}
+\hline
+\textbf{Data Type} &\textbf{Domain} & \textbf{Distribution} \\
+\hline
+ univariate, discrete, binary& $x \in {0,1}$& Bernoulli \\
+ \hline
+ univariate,~discrete,~multi-valued&$ x \in{1,2,...,K}$& categorical \\
+\hline
+univariate,~continuous,~unbounded&$ x \in R$& univariate normal\\
+\hline
+ univariate,~continuous, bounded&$x \in [0,1]$& beta\\
+\hline
+ multivariate, continuous, unbounded&$ x \in R_K $& multivariate normal\\
+\hline
+multivariate, continuous, bounded, sums to one & $x=[x_1 ,x_2 ,...,x_K ]^T $ ~~~~~  $x \in [0,1]$ ~$\sum_{k=1}^{K}x_k=1$&Dirichlet\\
+\hline
+bivariate, continuous, $x_1$ unbounded, $x_2$ bounded below& x = [$x_1$ , $x_2 $]   $x_1 \in R$ ~~~~~ $ x_2 \in R^+$ &normal-scaled inverse gamma\\
+\hline
+multivariate vector \textbf{x} and matrix \textbf{X}, \textbf{x} unbounded, \textbf{X} square, positive definite& $x \in R^K$ $X \in R^{KXK}$  $z^TXz \textgreater$ 0 $\forall$  $z \in R$ &Knormal inverse Wishart\\
+\hline
+\end{tabular}
+\end{center}
+\caption{ Common probability distributions: the choice of distribution depends on the type/domain of data to be modeled.}
+\label{tab:onecol}
+\end{table}%
+\end{small}
+\par Probability distributions such as the categorical and normal distributions are obviously useful for modeling visual data. When fitting probability models to data, we need to know how uncertain we are about the fit. This uncertainty is represented as a probability distribution over the parameters of the fitted model. So for each distribution used for modeling, there is a second distribution over the associated parameters (table~\ref{tab:short}). For example, the Dirichlet~\cite{teh2005sharing} is used to model the parameters of the categorical distribution. In this context, the parameters of the Dirichlet would be known as hyperparameters. More generally, the hyperparameters determine the shape of the distribution over the parameters of the original distribution.
+\begin{small}
+\begin{table}[p]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Distribution} &\textbf{Domain} & \textbf{Parameters modeled by} \\
+\hline
+Bernoulli & $x \in {0,1}$& beta \\
+\hline
+categorical& $x \in {1,2,...,K}$& Dirichlet \\
+\hline
+univariate normal & $x \in R$& normal inverse gamma\\
+\hline
+multivariate normal & $x \in R_K$ & normal inverse Wishart\\
+\hline
+\end{tabular}
+\end{center}
+\label{tab:short}
+\caption{ Common distributions used for modeling (left) and their associated domains (center). For each of these distributions there is a second associated distribution over the parameters (right).}
+\end{table}
+\end{small}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{43}
+}
+
+
+\end{document}
+
