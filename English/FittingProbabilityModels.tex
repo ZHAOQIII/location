@@ -1,0 +1,62 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Fitting Probability Models~\cite{deni2009fitting}}
+\author{Qi Zhao\\\\July 16, 2018}
+
+\maketitle
+\section{Introduction}
+It concerns fitting probability models to data ${x_i}_i^I$ = 1. And It also concerns calculating the probability of a new datum $x^*$ under the resulting model. This is known as evaluating the predictive distribution. We consider three methods: maximum likelihood~\cite{felsenstein1981evolutionary}, maximum a posteriori~\cite{gauvain1994maximum}, and the Bayesian approach~\cite{fei2007learning}.
+
+
+\section{Conclusions}
+\textbf{ Maximum likelihood}. As the name suggests, the maximum likelihood (ML) method finds the set of parameters $\hat{\theta}$ under which the data ${x_i}_i^I$ = 1 are most likely. To calculate the likelihood function Pr($x_i$|$\theta$) at a single data point $x_i$ , we simply evaluate the probability density~\cite{parzen1962estimation} function at $x_i$ . Assuming each data point was drawn independently from the distribution, the likelihood function Pr($x_{1...I}$|$\theta$) for a set of points is the product of the individual likelihoods. Hence, the ML estimate of the parameters is in Equation~\ref{equ:one}.
+\begin{equation}
+\begin{split}
+\hat{\theta}& = argmax _{\theta}[Pr(x_{1...I}|\theta)]\\
+  & = argmax _{\theta}\prod_{i = 1}^{I} Pr(x_i|\theta)
+   \label{equ:one}
+\end{split}
+\end{equation}
+
+\par where $argmax _{\theta}$ f[$\theta$] returns the value of $\theta$ that maximizes the argument f[$\theta$].
+
+\textbf{Maximum a posteriori}. In maximum a posteriori (MAP) fitting, From previous experience it may be known something about the possible parameter values. For example, in a time-sequence the values of the parameters at time t tell us a lot about the possible values at time t + 1, and this information would be encoded in the prior distribution. As the name suggests, maximum a posteriori in Equation~\ref{equ:two} estimation maximizes the posterior probability Pr($\theta$|$x_{1...I}$) of the parameters. Comparing this to the maximum likelihood criterion, we can see that it is identical except for the additional prior term; maximum likelihood is a special case of maximum a posteriori where the prior is uninformative.\\
+\begin{equation}
+\begin{split}
+  \label{equ:two}
+\hat{\theta} =  argmax _{\theta}\prod_{i = 1}^{I} [Pr(x_i|\theta)Pr(\theta)]
+\end{split}
+\end{equation}
+\par \textbf{The Bayesian approach}. Evaluating the predictive distribution is more difficult for the Bayesian case since it has not estimated a single model but have instead found a probability distribution over possible models. Hence, it can be calculated in Equation~\ref{equ:three}.\\
+\begin{equation}
+\begin{split}
+  \label{equ:three}
+Pr(x^*|x_{1...I}) =  \int Pr(x^*|\theta)Pr(\theta|x_{1...I})d\theta
+\end{split}
+\end{equation}
+\par which can be interpreted as follows: the term Pr($x^*$|$\theta$) is the prediction for a given value of $\theta$. So, the integral can be thought of as a weighted sum of the predictions given by different parameters $\theta$, where the weighting is determined by the posterior probability distribution Pr($\theta$|$x_{1...I}$) over the parameters (representing the confidence that different parameters are correct).
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{44}
+}
+
+
+\end{document}
+
