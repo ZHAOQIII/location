@@ -1,0 +1,74 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Covariance Matrix~\cite{Andrews1991Heteroskedasticity}}
+\author{Qi Zhao\\\\July 18, 2018}
+
+\maketitle
+\section{Introduction}
+The most common representation for uncertainty in machine vision is the multivariate normal distribution~\cite{Azzalini1996The}. The multivariate normal distribution has two parameters: the mean $\mu$ and covariance $\Sigma$. The mean $\mu$ is a DX1 vector that describes the position of the distribution. The covariance $\Sigma$ is a symmetric DxD positive definite matrix (implying that $z^T$$\Sigma$z is positive for any real vector z) and describes the shape of the distribution. The probability density function for short is in Equation~\ref{equ:one}.
+\begin{equation}\label{equ:one}
+Pr(x) = Norm_x[\mu, \Sigma]
+\end{equation}
+
+
+\section{Descriptions}
+Covariance matrices in multivariate normals take three forms, termed spherical~\cite{Ballauff2007Spherical}, diagonal~\cite{Carlson1988Covariance}, and full covariances~\cite{Povey2006Feature}. For the two dimensional (bivariate) case, these are in Equation~\ref{equ:two}.
+\begin{equation}\label{equ:two}
+  \sum_{spher} = \begin{bmatrix}
+\sigma^2&0\\
+0&\sigma^2
+\end{bmatrix}
+  \sum_{diag} = \begin{bmatrix}
+\sigma_1^2&0\\
+0&\sigma_2^2
+\end{bmatrix}
+  \sum_{full} = \begin{bmatrix}
+\sigma_{11}^2&\sigma_{12}^2\\
+\sigma_{21}^2&\sigma_{22}^2
+\end{bmatrix}
+\end{equation}
+\par The spherical covariance matrix is a positive multiple of the identity matrix and so has the same value on all of the diagonal elements and zeros elsewhere. In the diagonal covariance matrix, each value on the diagonal has a different positive value. The full covariance matrix can have non-zero elements everywhere although the matrix is still constrained to be symmetric and positive definite so for the 2D example, $\sigma_{12}^2$ = $\sigma_{21}^2$ .
+\par For the bivariate case (Figure~\ref{fig:onecol}), spherical covariances produce circular iso-density contours. Diagonal covariances produce ellipsoidal iso-contours~\cite{Raymond2012A} that are aligned with the coordinate axes. Full covariances also produce ellipsoidal iso-density contours, but these may now take an arbitrary orientation. More generally, in D-dimensions, spherical covariances produce iso-contours that are D-spheres, diagonal covariances produce iso-contours that are D-dimensional ellipsoids aligned with the coordinate axes, and full covariances produce iso-contour that are n-dimensional ellipsoids in general position.
+\begin{figure}
+  \centering
+  % Requires \usepackage{graphicx}
+  \includegraphics[width=0.8\linewidth]{covar.JPG}\\
+  \caption{ Covariance matrices take three forms. a-b) Spherical covariance matrices are multiples of the identity. The variables are independent and
+the iso-probability surfaces are hyperspheres. c-d) Diagonal covariance matrices permit different non-zero entries on the diagonal, but have zero entries
+elsewhere. The variables are independent, but scaled differently and the iso-probability surfaces are hyper-ellipsoids (ellipses in 2D) whose principal axes
+are aligned to the coordinate axes. e-f) Full covariance matrices are symmetric and positive definite. Variables are dependent and iso-probability surfaces are ellipsoids that are not aligned in any special way.}\label{fig:onecol}
+\end{figure}
+\par When the covariance is spherical or diagonal, the individual variables are independent. For example, for the bivariate diagonal case with zero mean in Equation~\ref{equ:three}.
+\begin{equation}
+\begin{split}
+Pr(x_1, x_2)& = \frac{1}{2\pi\sqrt{|\Sigma|}}exp[-0.5(x_1~x_2)\Sigma^{-1}\begin{pmatrix}
+x_1\\
+x_2\end{pmatrix}]\\
+&=Pr(x_1)Pr(x_2)
+   \label{equ:three}
+\end{split}
+\end{equation}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{45}
+}
+
+
+\end{document}
+
