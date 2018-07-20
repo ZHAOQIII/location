@@ -1,0 +1,60 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Decomposition of Covariance~\cite{Koutsoyiannis1999Optimal}}
+\author{Qi Zhao\\\\July 20, 2018}
+
+\maketitle
+\section{Introduction}
+Given a normal distribution~\cite{Stein1981Estimation} with mean zero and a full covariance matrix~\cite{Guevara2009Estimating}, it can be known that the iso-contours take an ellipsoidal form with the major and minor axes at arbitrary orientations. Now consider viewing the distribution in a new coordinate frame where the axes are aligned with the axes of the normal (Figure~\ref{fig:onecol}): in this new frame of reference, the covariance matrix $\Sigma_{diag}¡¯$ diag will be diagonal. Denote the data vector in the new coordinate system by x¡¯ = [$x_1$¡¯, $x_2$¡¯$]^T$ where the frames of reference are related by x¡¯ = Rx. It can write the probability distribution~\cite{Rannala1996Probability} over x¡¯ as in Equation~\ref{equ:one}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth,natwidth=510,natheight=242]{d.JPG}
+ \caption{Decomposition of full co-variance. For every bivariate normal distribution in variables $x_1$ and $x_2$ with full covariance matrix, there exists a coordinate system with variables $x_1$' and $x_2$' where the covariance is diagonal: the ellipsoidal iso-contours align with the coordinate axes $x_1$' and $x_2$' in this canonical coordinate frame. The two frames of reference are related by the rotation matrix \textbf{R} which maps ($x_1$', $x_2$') to ($x_1$, $x_2$ ). From this it follows (see text) that any covariance matrix $\Sigma$ can be broken down into the product \textbf{$R^T\Sigma_{diag}'R$} of a rotation matrix \textbf{R} and a diagonal covariance matrix \textbf{$\Sigma_{diag}'$}.}
+\label{fig:onecol}
+\end{figure}
+\begin{equation}\label{equ:one}
+Pr(x¡®) = \frac{1}{{2\pi}^{\frac{D}{2}}\sqrt{|\Sigma_{diag}'|}}exp[-0.5x^{'T}\Sigma_{diag}^{'-1}x']
+\end{equation}
+
+
+If we convert back to the original axes by substituting in x 0 = Rx to get in Equation~\ref{equ:two}.
+\begin{equation}
+\begin{split}
+Pr(x¡®)& = \frac{1}{{2\pi}^{\frac{D}{2}}\sqrt{|\Sigma_{diag}'|}}exp[-0.5(Rx)^{T}\Sigma_{diag}^{'-1}Rx]\\
+& = \frac{1}{{2\pi}^{\frac{D}{2}}\sqrt{|R^T\Sigma_{diag}'R|}}exp[-0.5(x)^{T}(R^T\Sigma_{diag}'R)^{-1}x]
+   \label{equ:two}
+\end{split}
+\end{equation}
+where we have used $|R^T\Sigma¡¯R|$ = $|R^T|$.$|\Sigma¡¯|$.$|R|$ = 1.$|\Sigma¡¯|$.1 = $|\Sigma¡¯|$. Equation~\ref{equ:three} is a multivariate normal with covariance.
+\begin{equation}\label{equ:three}
+\Sigma_{full} = R^T\Sigma_{diag}'R
+\end{equation}
+
+
+\section{Conclusions}
+It can be concluded that full covariance matrices are expressible as a product of this form involving a rotation matrix~\cite{Horn1954Doubly} R and a diagonal covariance matrix $\Sigma¡¯$, which is possible to retrieve these elements from an arbitrary valid covariance matrix $\Sigma_{full}$ by decomposing it in this way using the singular value decomposition.
+\par The matrix \textbf{R} contains the principal directions of the ellipsoid in its columns. The values on the diagonal of $\Sigma_{diag}¡¯$ encode the variance (and hence the width of the distribution) along each of these axes. Hence the results of the eigen-decomposition can be used to answer questions about which directions in space are most and least certain.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{46}
+}
+
+
+\end{document}
+
