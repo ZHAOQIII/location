@@ -1,0 +1,56 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Model Contingency~\cite{Fiedler1964A} of World on Data (Discriminative)}
+\author{Qi Zhao\\\\July 22, 2018}
+
+\maketitle
+\section{Introduction}
+At an abstract level, the goal of computer vision problems is to use the observed image data to infer something about the world. For example, it might observe adjacent frames~\cite{Lin1996Identification} of a video sequence and infer the camera motion, or it might observe a facial image and infer the identity.  There are two distinct approaches to modeling the relationship between the world state w and the data x, corresponding to modeling the posterior Pr(w$|$x)~\cite{Hinchey1996A}, or the likelihood Pr(x$|$w)~\cite{Dempster1977Maximum}. The two model types result in different approaches to inference. For the discriminative model~\cite{jaakkola1999exploiting}, it describe the posterior Pr(w$|$x) directly.
+\section{Descriptions}
+It defines a probability distribution over the world state w and make its parameters contingent on the data x. Since the world state is univariate and continuous, it chose the univariate normal. It fixes the variance, $\sigma^2$ and make the mean $\mu$ a linear function $\phi_0$ + $\phi_1$x of the data. So it can be seen in Equation~\ref{equ:one}.
+\begin{equation}\label{equ:one}
+Pr(w|x, \theta) = Norm_x[\phi_0 + \phi_1x, \sigma^2]
+\end{equation}
+\par where $\theta$ = {$\phi_0$, $\phi_1$, $\sigma^2$ } are the unknown parameters of the model (Figure~\ref{fig:onecol}). This model is referred to as linear regression.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth,natwidth=530,natheight=188]{dis.JPG}
+ \caption{Regression by modeling the posterior Pr(w$|$x) (discriminative). a) We model the world state w as normally distributed. b) We make the normal parameters a function of the observations x: the mean is a linear function $\mu$ = $\phi_0$ + $\phi_1$x of the observations, and the variance ¦Ò 2 is fixed. The learning algorithm fits the parameters $\theta$ = {$\phi_0$, $\phi_1$, $\sigma^2$ } to example training pairs {$x_i$, $w_i$}$^I_{i=1}$ (blue dots). In inference we take a new observation x and compute the posterior distribution Pr(w$|$x) over the state.}
+\label{fig:onecol}
+\end{figure}
+The learning algorithm estimates the model parameters $\theta$ from paired training examples {$x_i$, $w_i$}$^I_{i=1}$. For example, in the MAP approach~\cite{shen2007map}, it need seek in Equation~\ref{equ:two}.
+\begin{equation}
+\begin{split}
+\hat{\theta}& = argmax_{\theta}[Pr(\theta|w_{1...I}, x_{1...I})]\\
+& = argmax_{\theta}[Pr(w_{1...I}|x_{1...I}, \theta)Pr(\theta)]\\
+& = argmax_{\theta}[\prod_{i = 1}^{I} Pr(w_i|x_i, \theta)Pr(\theta)]
+   \label{equ:two}
+\end{split}
+\end{equation}
+
+\par where assumed that the I training pairs {$x_i$, $w_i$}$^I_{i=1}$ are independent, and defined a suitable prior Pr($\theta$).
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{47}
+}
+
+
+\end{document}
+
