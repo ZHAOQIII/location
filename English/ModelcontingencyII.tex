@@ -1,0 +1,58 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Model Contingency~\cite{Fiedler1964A} of World on Data (Generative)}
+\author{Qi Zhao\\\\July 24, 2018}
+
+\maketitle
+\section{Introduction}
+The two model types result in different approaches to inference, which can be used to estimate the world state w from an observed data example x, based on modeling the posterior Pr(w$|$x) and the likelihood Pr(x$|$w), respectively. The models were carefully chosen so that they predict exactly the same posterior P(w$|$x) over the world state. For the generative model~\cite{jaakkola1999exploiting}, it computes the posterior using Bayes' rule~\cite{waller1969bayes}, which sometimes results in complex inference algorithms.
+\section{Descriptions}
+In the generative formulation, it need choose a probability distribution~\cite{rannala1996probability} over the data x and make its parameters contingent on the world state w. Since the data are univariate and continuous, it will model the data as a normal distribution with fixed variance, $\sigma^2$ and a mean $\mu$ that is a linear function $\phi_0$ + $\phi_1$ w of the world state (Figure~\ref{fig:onecol}) in Equation~\ref{equ:one}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\linewidth]{generate1.JPG}
+ \caption{Regression by modeling likelihood Pr(x$|$w) (generative). a) We represent the data x with a normal distribution. b) We make the normal parameters functions of the world state w. Here the mean is a linear function $\mu$ = $\phi_0$ + $\phi_1$w of the world state and the variance $\sigma^2$ is fixed. The learning algorithm fits the parameters $\theta$ = \{$\phi_0$, $\phi_1$, $\sigma^2$\} to example training pairs {$x_i$, $w_i$}$^I_{i=1}$ (blue dots). c) We also learn a prior distribution over the world state w (here modeled as a normal distribution with parameters $\theta_p$ = \{$\mu_p$, $\sigma_p$\}). In inference we take a new datum x and compute the posterior Pr(w$|$x) over the state. d) This can be done by computing the joint distribution Pr(x,w) = Pr(x$|$w)Pr(w) (weighting each row of (b) by the appropriate value from the prior) and e) normalizing the columns Pr(w$|$x) = Pr(x,w)/Pr(x). Together these operations implement Bayes¡¯ rule: Pr(w$|$x) = Pr(x$|$w)Pr(w)/Pr(x).}
+\label{fig:onecol}
+\end{figure}
+\begin{equation}\label{equ:one}
+Pr(x|w, \theta) = Norm_x[\phi_0 + \phi_1x, \sigma^2]
+\end{equation}
+It will choose a univariate normal and allow the variance $\sigma^2$ and the mean $\mu$ to be functions of the binary world state w (Figure~\ref{fig:short}). So the likelihood is in Equation~\ref{equ:two}.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.9\linewidth]{generate2.JPG}\\
+ \caption{ Classification by modeling the likelihood Pr(x$|$w) (generative). a) We choose a normal distribution to represent the data x. b) We make the parameters {$\mu$, $\sigma^2$} of this normal a function of the world state w. In practice, this means using one set of mean and variance parameters when the world state w = 0 and another when w = 1. The learning algorithm fits the parameters $\theta$ = \{$\mu_0$, $\mu_1$, $\sigma^2_0$, $\sigma^2_1$\} to example training pairs \{$x_i$, $w_i$\}$^I_{i=1}$. c) We also model the prior probability of the world state w with a Bernoulli distribution with parameter $\lambda_p$. d) In inference we take a new datum x and compute the posterior Pr(w$|$x) over the state using Bayes¡¯ rule.}
+\label{fig:short}
+\end{figure}
+
+\begin{equation}\label{equ:two}
+Pr(x|w, \theta) = Norm_x[\mu_w, \sigma^2_w]
+\end{equation}
+\section{Conclusions}
+For binary classification~\cite{li2007ordinal}, there is an asymmetry between the world state, which is discrete, and the measurements, which are continuous. Consequently, the generative and discriminative models look quite different, and the posteriors over the world state w as a function of the data x have different shapes. For the discriminative model~\cite{Desai2010Discriminative}, this function is by definition sigmoidal, but for the generative case it has a more complex form that was implicitly defined by the normal likelihoods. In general, choosing to model Pr(w$|$x) or P(x$|$w) will affect the expressiveness of the final model.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{48}
+}
+
+
+\end{document}
+
