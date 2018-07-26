@@ -1,0 +1,49 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ Which Type of Model Should It Use?}
+\author{Qi Zhao\\\\July 26, 2018}
+
+\maketitle
+It has established that there are two different types of model that relate the world state and the observed data,  the discriminative model~\cite{tan2010face} and the generative model~\cite{sabuncu2010generative}. But when should it use each type of model? There is no definitive answer to this question, but some considerations are:\\
+
+1.Inference is generally simpler with discriminative models. They directly model the conditional probability distribution~\cite{brook1972approach} of the world Pr(w$|$x) given the data. In contrast, generative models calculate this probability via Bayes¡¯ rule~\cite{waller1969bayes}, and sometimes this requires a computationally expensive algorithm.
+\par 2.Generative methods build probability models Pr(x$|$w) over the data whereas discriminative models just build a probability model Pr(w$|$x) over the world state. The data (usually an image) are generally of much higher dimension than the world state (some aspect of a scene), and modeling it is costly. Moreover, there may be many aspects of the data which do not influence the state; it might devote parameters to describing data configuration although they both imply the same world state (Figure~\ref{fig:onecol}).
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{type.JPG}\\
+ \caption{Generative vs. discriminative models. a) Generative approach: we separately model the probability Pr(x$|$w) for each class. This may require a complex model with many parameters. b) Posterior probability distribution Pr(w$|$x) computed via Bayes¡¯ rule with a uniform prior. Notice that the complicated structure of the individual class conditional density functions isn¡¯t reflected in the posterior: here, it would have been more efficient to take a discriminative approach and model this posterior directly.}
+\label{fig:onecol}
+\end{figure}
+\par 3.Modeling the likelihood Pr(x$|$w)~\cite{shepp1982maximum} mirrors the actual way that the data were created; the state of the world did create the observed data through some physical process (usually light being emitted from a source, interacting with the object and being captured by a camera). If wishing to build information about the generation process into our model, then this approach is desirable. For example, it can account for phenomena such as perspective projection and occlusion.
+\par 4.Sometimes parts of the training or test data vector x may be missing. Here, generative models are preferred. They model the joint distribution over all of the data dimensions and can effectively interpolate the missing elements.
+\par 5.A fundamental property of the generative approach is that it allows incorporation of expert knowledge in the form of a prior. It is harder to impose prior knowledge in a principled way in discriminative models.\\
+
+It is notable that generative models are more common in vision applications.
+
+
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{49}
+}
+
+
+\end{document}
+
