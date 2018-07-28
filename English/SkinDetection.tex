@@ -1,0 +1,65 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{tipa}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Skin Detection~\cite{Albiol2001Optimum}}
+\author{Qi Zhao\\\\July 28, 2018}
+
+\maketitle
+\section{Introduction}
+The goal of skin-detection algorithms is to infer a label w $\in$ \{0,1\} denoting the presence or absence of skin at a pixel, based on the RGB~\cite{Bo2013Unsupervised} measurements x = [$x^R$, $x^G$, $x^B$] at that pixel. This is a useful precursor to segmenting a face or hand, or it may be used as the basis of a crude method for detecting prurient content in web images. Taking a generative approach, it can be described the likelihoods as in Equation~\ref{equ:one}.
+\begin{equation}\label{equ:one}
+Pr(x|w = k) = Norm_x[\mu_k, \sigma_k]
+\end{equation}
+
+\par and the prior probability~\cite{Jeffreys1946An} over states as in Equation~\ref{equ:two}.
+
+\begin{equation}\label{equ:two}
+Pr(w) = Bern_w[\lambda]
+\end{equation}
+
+\par In the learning algorithm, it estimates the parameters $\mu_0$, $\mu_1$, $\Sigma_0$, $\Sigma_1$ from training data pairs \{$w_i$, $x_i$ \}$^I_{i=1}$ where the pixels have been labeled by hand. In particular we learn $\mu_0$ and $\Sigma_0$ from the subset of the training data where $w_i$ = 0 and $\mu_1$ and $\Sigma_1$ from the subset where $w_i$ = 1. The prior parameter is learned from the world states \{$w_i$\}$^I_{i=1}$ alone.
+\par To classify a new data point x as skin or non-skin it can apply Bayes¡¯ rule~\cite{Grether1980Bayes} in Equation~\ref{equ:three} and denote this pixel as skin if Pr(w = 1$|$x) $>$ 0.5. Figure~\ref{fig:onecol} shows the result of applying this model at each pixel independently in the image. Note that the classification is not perfect: there is genuinely an overlap between the skin and non-skin distributions and this inevitably results in misclassified pixels. The results could be improved by exploiting the fact that skin areas tend to be contiguous regions without small holes.
+\begin{equation}\label{equ:three}
+Pr(w = 1|x) = \frac{Pr(x|w = 1)Pr(w = 1)}{\sum_{k = 0}^1Pr(x|w = k)Pr(w = k)}
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\linewidth]{skin.JPG}
+ \caption{Skin detection. For each pixel we aim to infer a label w $\in$ \{0,1\} denoting the absence or presence of skin based on the RGB triple x. Here we modeled the class conditional density functions Pr(x$|$w) as normal distributions. a) Original image. b) Log likelihood (log of data assessed under class-conditional density function) for non-skin. c) Log likelihood for skin. d) Posterior probability of belonging to skin class. e) Thresholded posterior probability Pr(w$|$x) $>$ 0.5 gives estimate of w.}
+\label{fig:onecol}
+\end{figure}
+\par The RGB data are naturally discrete with $x^R$, $x^G$, $x^B$ $\in$ \{0,1,...,255\}, which is basic of the skin detection model on this assumption. For example, modeling the three color channels independently, the likelihoods become in Equation~\ref{equ:four}.
+\begin{equation}\label{equ:four}
+Pr(x|w = k) = Cat_{x^R}[\lambda_k^R]Cat_{x^G}[\lambda_k^G]Cat_{x^B}[\lambda_k^B]
+\end{equation}
+
+
+
+\section{Conclusions}
+\par Assume that the elements of the data vector are independent as na\"ive Bayes. Of course, it is not necessarily valid in the real world. To model the joint distribution~\cite{Longuet1975On} of the R,G, and B components, it might combine them to form one variable with $256^3$ entries and model this with a single categorical distribution. And it is more practical to quantize each channel to fewer levels (say 8) before combining them together.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{50}
+}
+
+
+\end{document}
+
