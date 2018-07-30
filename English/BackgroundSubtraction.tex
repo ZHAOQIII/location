@@ -1,0 +1,69 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Background Subtraction~\cite{Piccardi2005Background}}
+\author{Qi Zhao\\\\July 30, 2018}
+
+\maketitle
+\section{Introduction}
+A second application of the generative classification model~\cite{Ren2008Learning} is for background subtraction. Here, the goal is to infer a binary label $w_n$ $\in$ \{0,1\} which indicates whether the $n^th$ pixel in the image is part of a known background (w = 0) or whether a foreground object is occluding it (w = 1). As for the skin detection model, this is based on its RGB pixel data $x_n$ at that pixel.
+
+\par It is usual to have training data \{$x_{in}$\}$^{I,N}_{i=1, n=1}$ that consists of a number of empty scenes where all pixels are known to be background. However, it is not typical to have examples of the foreground objects which are highly variable in appearance.For this reason, we model the class conditional distribution of the background as a normal distribution in Equation~\ref{equ:one}.
+\begin{equation}\label{equ:one}
+Pr(x_n|w = 0) = Norm_{x_n}[\mu_{n0}, \Sigma_{n0}]
+\end{equation}
+
+but model the foreground class as a uniform distribution in Equation~\ref{equ:two}.
+\begin{equation}
+\begin{aligned}
+\begin{split}
+Pr(x_n|w = 0) =
+\begin{cases}
+\frac{1}{255^3}  &0 < x_n^R, x_n^G, x_n^B < 255\\
+0,&otherwise
+\end{cases}
+\end{split}
+\label{equ:two}
+\end{aligned}
+\end{equation}
+and again model the prior as a Bernoulli variable~\cite{Serfling1978Some}.
+\section{Descriptions}
+To compute the posterior distribution~\cite{West1993Approximating} it once more apply Bayes¡¯ rule~\cite{Waller1974A}. Typical results are shown in Figure~\ref{fig:onecol}, which illustrates a common problem with this method: shadows are often misclassified as foreground. A simple way to remedy this is to classify pixels based on the hue alone.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{background.JPG}
+ \caption{ Background subtraction. For each pixel we aim to infer a label w $\in$ {0,1} denoting the absence or presence of a foreground object. a) We learn a class conditional density model Pr(x|w) for the background from training examples of an empty scene. The foreground model is treated as uniform. b) For a new image, we then compute the posterior distribution using Bayes¡¯ rule. c) Posterior probability of being foreground Pr(w = 1$|$x). Images from CAVIAR database.}
+\label{fig:onecol}
+\end{figure}
+\par In some situations it need a more complex distribution to describe the background. For example, consider an outdoor scene in which trees are blowing in the wind (Figure~\ref{fig:short}). Certain pixels may have bimodal distributions where one part of the foliage intermittently moves in front of another. It is clear that the unimodal normal likelihood~\cite{Bartolucci2005Clustering} cannot provide a good description of this data, and the resulting background segmentation result will be poor.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{background1.JPG}
+ \caption{ Background subtraction in deforming scene. a) The foliage is blowing in the wind in the training images. b) The distribution of RGB values at the pixel indicated by the circle in (a) is now bimodal and not well described by a normal density function (red channel only shown). Images from video by Terry Boult.}
+\label{fig:short}
+\end{figure}
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{51}
+}
+
+
+\end{document}
+
