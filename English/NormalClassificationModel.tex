@@ -1,0 +1,70 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Normal Classification Model~\cite{panjehpour1995spectroscopic}}
+\author{Qi Zhao\\\\July 30, 2018}
+
+\maketitle
+\section{Introduction}
+As a representative problem when considering face detection~\cite{osuna1997training}; it observes a 60 ¡Á 60 RGB~\cite{lai2011large} image patch and whether it contains a face or not. To this end, it concatenates the RGB values to form the 10800¡Á1 vector x. The goal is to take the vector x and return a label w $\in$ {0,1} indicating whether it contains background (w = 0) or a face (w = 1). In a real face detection system it would repeat this procedure for every possible sub-window of an image (Figure~\ref{fig:onecol}). It will start with a basic generative approach in which it describes the likelihood of the data in the presence/absence of a face with a normal distribution~\cite{azzalini1996multivariate}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{Face.JPG}
+ \caption{Face detection. Consider examining a small window of the image (here 60 ¡Á 60). We concatenate the RGB values in the window to make a data vector x of dimension 10800 ¡Á 1. The goal of face detection is to infer a label w $\in$ \{0,1\} indicating whether the window contains (a) a background region (w = 0) or (b) an aligned face (w = 1). (c-i) We repeat this operation at every position and scale in the image by sweeping a fixed size window through a stack of resized images, estimating w at every point.}
+\label{fig:onecol}
+\end{figure}
+
+\par It will take a generative approach to face detection; It will model the probability of the data x and parameterize this by the world state w. It will describe the data with a multivariate normal distribution in Equation~\ref{equ:one}
+\begin{equation}\label{equ:one}
+Pr(x|w) = Norm_{x}[\mu_{w}, \Sigma_{w}]
+\end{equation}
+or treating the two possible values of the state w separately, it can explicitly write in Equation~\ref{equ:two}.
+\begin{equation}
+\begin{split}
+Pr(x|w = 0) = Norm_{x}[\mu_{0}, \Sigma_{0}]\\
+Pr(x|w = 1) = Norm_{x}[\mu_{1}, \Sigma_{1}]
+\end{split}
+\label{equ:two}
+\end{equation}
+
+\par These expressions are examples of class conditional density functions. They describe the density of the data x conditional on the value of the world state w.
+
+\section{Descriptions}
+The goal of learning is to estimate the parameters $\theta$ = {$\mu_0$, $\Sigma_0$, $\mu_1$, $\Sigma_1$} from example pairs of training data \{$x_i$, $w_i$\}$^I_{i=1}$. Since parameters $\mu_0$ and $\Sigma_0$ are concerned exclusively with background regions (where w=0) we can learn them from the subset of training data $S_0$ that belonged to the background.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{Face1.JPG}
+ \caption{Class conditional density functions for normal model with diagonal covariance. Maximum likelihood fits based on 1000 training examples per class. a) Mean for background data $\mu_0$ (reshaped from 10800¡Á1 vector to 60 ¡Á 60 RGB image). b) Reshaped square root of diagonal covariance for background data $\Sigma_0$. c) Mean for face data $\mu_1$. d) Covariance for face data $\Sigma_1$. The background model has little structure: the mean is uniform and the variance is high everywhere. The mean of the face model clearly captures class-specific information. The covariance of the face is larger at the edges of the image, which usually contain hair or background.}
+\label{fig:short}
+\end{figure}
+\par Similarly, $\mu_1$ and $\Sigma_1$ are concerned exclusively with faces (where w = 1) and can be learned from the subset $S_1$ of training data which contained faces. Figure~\ref{fig:short} shows the maximum likelihood estimates of the parameters where it has used the diagonal form of the covariance matrix~\cite{gustafson1979fuzzy}.
+\par The goal of the inference algorithm is to take a new facial image x and assign a label w to it. To this end, we define a prior over the values of the world state Pr(w) = Ber$n_w$ [¦Ë] and apply Bayes¡¯ rule~\cite{waller1969bayes} in Equation~\ref{equ:three}.
+
+\begin{equation}\label{equ:three}
+Pr(w = 1|x) = \frac{Pr(x|w = 1)Pr(w = 1)}{\sum_{i=1}^{1}Pr(x|w = k)Pr(w = k)}
+\end{equation}
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{52}
+}
+
+
+\end{document}
+
