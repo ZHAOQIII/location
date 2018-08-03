@@ -1,0 +1,48 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Deficiencies of the Multivariate Normal Model~\cite{Skovgaard1984A}}
+\author{Qi Zhao\\\\August 3, 2018}
+
+\maketitle
+\section{Introduction}
+There is a generative approach to face detection; it will model the probability of the data x and parameterize this by the world state w. It will describe the data with a multivariate normal distribution so that or treating the two possible values of the state w separately.
+\par Unfortunately, this model does not detect faces reliably. While this model achieves above-chance performance, it doesn't come close to producing a state-of-the-art result. This is hardly surprising: the success of this classifier hinges~\cite{Chen1989Oyster} on fitting the data with a normal distribution~\cite{Stein1981Estimation}. Unfortunately, this fit is poor for three reasons (Figure~\ref{fig:onecol}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{Defi.JPG}
+ \caption{ a) Problems with the multivariate normal density. b) Normal models are unimodal, but mixtures of Gaussians can model multi-modal distributions. c) Normal distributions are not robust to outliers, but t-distributions can cope with unusual observations. d) Normal models need many parameters in high dimensions but subspace models reduce this requirement. e) These solutions can be combined to form hybrid models addressing several of these problems at once.}
+\label{fig:onecol}
+\end{figure}
+\par \textbf{1.The normal distribution is unimodal}; neither faces nor background regionscare well represented by a pdf with a single peak.
+\par \textbf{2.The normal distribution is not robust}; a single outlier can dramatically affect the estimates of the mean and covariance.
+\par \textbf{3.The normal distribution has too many parameters}; here the data have D = 10800 dimensions. The full covariance matrix contains $\frac{D(D + 1)}{2}$ parameters. With only 1000 training examples, it cannot even specify these parameters uniquely, so it was forced to use the diagonal form.
+
+
+\section{Conclusions}
+\par There are some ways to tackling these problems. To make the density multi-modal, it introduces mixture models~\cite{Figueiredo2000Unsupervised}. To make the density robust, it replaces the normal with the t-distribution~\cite{Coornish1954The}. To cope with parameter estimation in high dimensions, it introduces subspace models~\cite{Verhaegen1995Identifying}.
+\par The new models have much in common with each other. In each case it introduces a hidden or latent variable $h_i$ associated with each observed data point $x_i$. The hidden variable induces the more complex properties of the resulting pdf.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{53}
+}
+
+
+\end{document}
+
