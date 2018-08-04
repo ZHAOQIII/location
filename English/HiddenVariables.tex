@@ -1,0 +1,59 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ Hidden Variables}
+\author{Qi Zhao\\\\August 5, 2018}
+
+\maketitle
+\section{Introduction}
+To make the density multi-modal, it introduces mixture models~\cite{Figueiredo2000Unsupervised}. To make the density robust, it replaces the normal with the t-distribution~\cite{Coornish1954The}. To cope with parameter estimation in high dimensions, it introduces subspace models~\cite{Verhaegen1995Identifying}.
+\par The new models have much in common with each other. In each case it introduces a hidden or latent variable $h_i$ associated with each observed data point $x_i$. The hidden variable induces the more complex properties of the resulting pdf. To model a complex probability density function over the variable x, it will introduce a hidden or latent variable h, which may be discrete or continuous.
+
+
+\section{Descriptions}
+To exploit the hidden variables, it describes the final density Pr(x) as the marginalization of the joint density Pr(x,h)~\cite{Shepp1979The} between x and h in Equation~\ref{equ:one} so that it is relatively simple to model, but produces an expressive family of marginal distributions Pr(x) when it integrates over h (see 	Figure~\ref{fig:onecol}).
+\begin{equation}\label{equ:one}
+Pr(x) = \int Pr(x, h)dh
+\end{equation}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{hide.JPG}
+ \caption{Using hidden variables to help model complex densities. One way to model the density Pr(x) is to consider the joint probability distribution Pr(x,h) between the observed data x and a hidden variable h. The density Pr(x) can be considered as the marginalization of (integral over) this distribution with respect to the hidden variable h. As we manipulate the parameters ¦È of this joint distribution, the marginal changes and the agreements with the observed data \{$x_i$\}$^I_{i=1}$ increases or decreases. Sometimes it is easier to fit the distribution in this indirect way than to directly manipulate Pr(x).}
+\label{fig:onecol}
+\end{figure}
+
+Whatever form can be choose for the joint distribution in Equation~\ref{equ:two}, there are two possible approaches to fitting the model to training data \{$x_i$\}$^I_{i=1}$ using the maximum likelihood~\cite{Dempster1977Maximum} method. It could directly maximize the log likelihood of the distribution Pr(x) from the left hand side of equation (see Equation~\ref{equ:three}). It uses the expectation maximization~\cite{Carson2002Blobworld} algorithm, which works directly with the right-hand side of equation (see Equation~\ref{equ:four}).
+\begin{equation}\label{equ:two}
+Pr(x|\theta) = \int Pr(x, h|\theta)dh
+\end{equation}
+\begin{equation}\label{equ:three}
+\hat{\theta} = argmax_{\theta} [\sum_{i = 1}^IlogPr(x_i|\theta)]
+\end{equation}
+\begin{equation}\label{equ:four}
+\hat{\theta} = argmax_{\theta} [\sum_{i = 1}^Ilog[\int Pr(x_i, h_i|\theta)dh_i]]
+\end{equation}
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{54}
+}
+
+
+\end{document}
+
