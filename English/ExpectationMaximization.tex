@@ -1,0 +1,63 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Expectation Maximization~\cite{Moon2000The}}
+\author{Qi Zhao\\\\August 7, 2018}
+
+\maketitle
+\section{Introduction}
+ The goal of the expectation maximization (EM) algorithm is to provide just enough information to use this technique for fitting models. The EM algorithm is a general-purpose tool for fitting parameters $\theta$ in models of the form of Equation~\ref{equ:one} where the EM algorithm works by defining a lower bound B[\{$q_i$($h_i$)\}, $\theta$] on the log likelihood in Equation~\ref{equ:two} and iteratively increasing this bound. The lower bound is simply a function that is parameterized by $\theta$ and some other quantities and is guaranteed to always return a value that is less than or equal to the log likelihood L[$\theta$] for any given set of parameters $\theta$ (see Figure~\ref{fig:onecol}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{expect.JPG}
+ \caption{ Manipulating the lower bound. a) Consider the log likelihood L[$\theta$] of the data \{x\}$^I_{i=1}$ as a function of the model parameters $\theta$ (red curve). In maximum likelihood~\cite{Dempster1977Maximum} learning our goal is to find the parameters $\theta$ that maximize this function. A lower bound on the log likelihood is another function B[$\theta$] of the parameters ¦È that is everywhere lower or equal to the log likelihood (green curve). One way to improve the current estimate (blue dot) is to manipulate the parameters so that B[$\theta$] increases (purple dot). This is the goal of the maximization step of the EM algorithm. b) The lower bound B [\{$q_i$($h_i$)\}$^I_{i=1}$, $\theta$] also depends on a set of probability distributions \{$q_i$($h_i$)\}$^I_{i=1}$ over hidden variables \{$h_i$\}. Manipulating these probability distributions~\cite{Eskin2000Anomaly} changes the value that the lower bound returns for every $\theta$ (e.g., green curve). So a second way to improve the current estimate (purple dot) is to change the distributions in such a way that the curve increases for the current parameters (blue dot). This is the goal of the expectation step of the EM algorithm.}
+\label{fig:onecol}
+\end{figure}
+\begin{equation}\label{equ:one}
+Pr(x|\theta) = \int Pr(x, h|\theta)dh
+\end{equation}
+\begin{equation}\label{equ:two}
+\hat{\theta} = argmax_{\theta}[\sum_{i = 1}^I log[\int Pr(x_i, h_i|\theta)dh_i]]
+\end{equation}
+
+\section{Descriptions}
+For the EM algorithm, the particular lower bound chosen is in Equation~\ref{equ:three}.
+\begin{equation}
+\begin{split}
+B[{q_i(h_i)}, \theta] & = \sum_{i = 1}^I \int q_i(h_i)log[\frac{Pr(x_i, h_i|\theta)}{q_i(h_i)}]dh_i \\
+& \leq \sum_{i = 1}^I log[\int Pr(x_i, h_i|\theta)dh_i]
+\end{split}
+\label{equ:three}
+\end{equation}
+It is not obvious that this inequality is true, making this a valid lower bound;
+
+In addition to the parameters $\theta$, the lower bound B[\{$q_i$($h_i$)\}, $\theta$] also depends on a set of I probability distributions \{$q_i$($h_i$)\}$^I_{i=1}$ over the hidden variables \{$h_i$\}$^I_{i=1}$. When it varies these probability distributions, the value that the lower bound returns will change, but it will always remain less than or equal to the log likelihood.
+
+The EM algorithm manipulates both the parameters $\theta$ and the distributions \{$q_i$($h_i$)\}$^I_{i=1}$ to increase the lower bound. It alternates between:
+
+1.updating the probability distributions \{$q_i$($h_i$)\}$^I_{i=1}$ to improve the bound in Equation~\ref{equ:three}. This is called the expectation step or E-step.
+2.updating the parameters $\theta$ to improve the bound in Equation~\ref{equ:three}. This is called the maximization step or M-step.
+Each of these steps is guaranteed to improve the bound, and iterating them alternately is guaranteed to find at least a local maximum with respect to $\theta$.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{55}
+}
+
+
+\end{document}
+
