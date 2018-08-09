@@ -1,0 +1,54 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{  Mixture of Gaussians~\cite{Dasgupta1999Learning}}
+\author{Qi Zhao\\\\August 9, 2018}
+
+\maketitle
+The mixture of Gaussians (MoG) is a prototypical example of a model where learning is suited to the EM algorithm~\cite{Wu1983On}. The data are described as a weighted sum of K normal distributions~\cite{Andrews1974Scale} in Equation~\ref{equ:one}.
+\begin{equation}\label{equ:one}
+Pr(x|\theta) = \sum_{k = 1}^K \lambda_kNorm_x[\mu_k, \Sigma_k]
+\end{equation}
+
+where $\mu_{1...K}$ and $\Sigma_{1...K}$ are the means and covariances of the normal distributions and $\lambda_{1...K}$ are positive valued weights that sum to one. The mixtures of Gaussians model describes complex multi-modal probability~\cite{Nagode1998A} densities by combining simpler constituent distributions (Figure~\ref{fig:onecol}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{gaussian.JPG}
+ \caption{ Mixture of Gaussians model in 1D. A complex multi-modal probability density function (black solid curve) is created by taking a weighted sum or mixture of several constituent normal distributions with different means and variances (red, green and blue dashed curves). To ensure that the final distribution is a valid density, the weights must be positive and sum to one.}
+\label{fig:onecol}
+\end{figure}
+
+To learn the parameters $\theta$ = \{$\mu_k$, $\Sigma_k$, $\lambda_k$\}$^K_{k=1}$ from training data \{$x_i$\}$^I_{i=1}$ it could apply the straightforward maximum likelihood~\cite{Dempster1977Maximum} approach in Equation~\ref{equ:two}.
+\begin{equation}
+\begin{split}
+\hat{\theta} & = argmax_x[\sum_{i = 1}^Ilog[Pr(x_i|\theta)]] \\
+& = argmax_x[\sum_{i = 1}^Ilog[\sum_{k = 1}^K \lambda_kNorm_x[\mu_k, \Sigma_k]]
+\end{split}
+\label{equ:two}
+\end{equation}
+
+Unfortunately, if it takes the derivative with respect to the parameters $\theta$ and equate the resulting expression to zero, it is not possible to solve the resulting equations in closed form. The sticking point is the summation inside the logarithm, which precludes a simple solution. Of course, it could use a nonlinear optimization approach, but this would be complex as it would have to maintain the constraints on the parameters; the weights $\lambda$ must sum to one and the covariances \{$\Sigma_k$\} $^K_{k = 1}$ must be positive definite. For a simpler approach, it expresses the observed density as a marginalization~\cite{Larsson2008Fixed} and use the EM algorithm to learn the parameters.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{56}
+}
+
+
+\end{document}
+
