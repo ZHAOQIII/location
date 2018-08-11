@@ -1,0 +1,62 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Mixture of Gaussians~\cite{Dasgupta1999Learning} as A Marginalization~\cite{Larsson2008Fixed}}
+\author{Qi Zhao\\\\August 11, 2018}
+
+\maketitle
+\section{Introduction}
+The mixture of Gaussians model can be expressed as the marginalization of a joint probability distribution~\cite{Stansell2004Improved} between the observed data x and a discrete hidden variable h that takes values h $\in$ \{1...K\} (Figure~\ref{fig:onecol}). If it defines in Equation~\ref{equ:one}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{marginalization.JPG}
+ \caption{ Mixture of Gaussians as a marginalization. The mixture of Gaussians can also be thought of in terms of a joint distribution Pr(x,h) between the observed variable x and a discrete hidden variable h. To create the mixture density it marginalizes over h. The hidden variable has a straightforward interpretation: it is the index of the constituent normal distribution~\cite{Stein1981Estimation}.}
+\label{fig:onecol}
+\end{figure}
+\begin{flalign}
+\begin{split}
+Pr(x|h, \theta) = Norm_x[\mu_h, \Sigma_h] \\
+Pr(h, \theta) = Cat_h [\lambda]
+\end{split}
+\label{equ:one}
+\end{flalign}
+
+
+where $\lambda$ = [$\lambda_1$ ...$\lambda_K$] are the parameters of the categorical distribution, then it can recover the original density using in Equation~\ref{equ:two}.
+\begin{equation}
+\begin{split}
+Pr(x | \theta) & = \sum_{k = 1}^KPr(x, h = k | \theta) \\
+& = \sum_{k = 1}^KPr(x|h = k, \theta)Pr(h = k | \theta)\\
+& = \sum_{k = 1}^K \lambda_kNorm_x[\mu_k, \Sigma_k]
+\end{split}
+\label{equ:two}
+\end{equation}
+
+
+\section{Conclusions}
+Interpreting the model in this way also provides a method to draw samples from a mixture of Gaussians: it samples from the joint distribution Pr(x,h), and then discard the hidden variable h to leave just a data sample x. To sample from the joint distribution Pr(x,h) it first sample h from the categorical prior Pr(h)~\cite{Piatti2009Limits}, then sample x from the normal distribution Pr(x$|$h) associated with the value of h. Notice that the hidden variable h has a clear interpretation in this procedure; it determines which of the constituent normal distributions is responsible for the observed data point x.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{57}
+}
+
+
+\end{document}
+

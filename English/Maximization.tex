@@ -1,0 +1,63 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Expectation Maximization~\cite{Moon2000The} for Fitting Mixture Models}
+\author{Qi Zhao\\\\August 13, 2018}
+
+\maketitle
+\section{Introduction}
+To learn the MoG parameters~\cite{roy2013dynamic} $\theta$ = \{$\lambda_k$, $\mu_k$, $\Sigma_k$\}$^K_{k=1}$ from training data \{$x_i$\}$^I_{i=1}$ it applies the EM algorithm~\cite{Wu1983On}. And it initializes the parameters randomly and alternate between performing the E- and M-steps.
+
+ In the E-step, it maximizes the bound with respect to the distributions $q_i$ ($h_i$) by finding the posterior probability distribution Pr($h_i$ $|$$x_i$) of each hidden variable $h_i$ given the observation $x_i$ and the current parameter settings in Equation~\ref{equ:one}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{max.JPG}
+ \caption{ E-step for fitting the mixture of Gaussians model. For each of the I data points $x_{1...I}$, it calculates the posterior distribution Pr($h_i$$|$$x_i$) over the hidden variable $h_i$.The posterior probability~\cite{Erixon2003Reliability} Pr($h_i$ = k$|$$x_i$) that h i takes value k can be understood as the responsibility of normal distribution k for data point $x_i$. For example, for data point $x_1$ (magenta circle), component 1 (red curve) is more than twice as likely to be responsible than component 2 (green curve). Note that in the joint distribution (left), the size of the projected data point indicates the responsibility.}
+\label{fig:onecol}
+\end{figure}
+\begin{equation}
+\begin{split}
+q_i(h_i) &= Pr(h_i = k|x_i, \theta^{[t]}) \\
+& = \frac{Pr(x_i|h_i = k, \theta^{[t]})Pr(h_i = k, \theta^{[t]})}{\sum_{j = 1}^KPr(x_i|h_i = j, \theta^{[t]})Pr(h_i = j, \theta^{[t]})} \\
+& = \frac{\lambda_kNorm_{x_i}[\mu_k, \Sigma_k]}{\sum_{j = 1}^K\lambda_jNorm_{x_i}[\mu_j, \Sigma_j]}\\
+& = r_{ik}
+\end{split}
+\label{equ:one}
+\end{equation}
+
+In other words it computes the probability Pr($h_i$ = k$|$$x_i$, $\theta^{[t]}$) that the $k^{th}$ normal distribution was responsible for the $i^{th}$ data point (Figure~\ref{fig:onecol}). It denotes this responsibility by $r_{ik}$ for short. In the M-step, it maximizes the bound with respect to the parameters $\theta$ = \{$\lambda_k$, $\mu_k$, $\Sigma_k$\}$^K_{k=1}$ in  Equation~\ref{equ:two}.
+\begin{equation}
+\begin{split}
+\hat{\theta}^{[t+1]} & = argmax_{\theta}[\sum_{i = 1}^I\sum_{k = 1}^K\hat{q_i}(h_i = k)log[Pr(x_i, h_i = k|\theta)]] \\
+& = argmax_{\theta}[\sum_{i = 1}^I\sum_{k = 1}^Kr_{ik}log[\lambda_kNorm_{x_i}[\mu_k, \Sigma_k]]]
+\end{split}
+\label{equ:two}
+\end{equation}
+
+
+\section{Conclusions}
+This maximization can be performed by taking the derivative of the expression with respect to the parameters, equating the result to zero and rearranging, taking care to enforce the constraint $\sum_k$$\lambda_k$ = 1 using Lagrange multipliers~\cite{Belgacem1999The}.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{58}
+}
+
+
+\end{document}
+
