@@ -1,0 +1,59 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{The t-distribution~\cite{Geweke1991Efficient}}
+\author{Qi Zhao\\\\August 15, 2018}
+
+\maketitle
+The second significant problem with using the normal distribution~\cite{Stein1981Estimation} to describe visual data~\cite{Andrienko1999Interactive} is that it is not robust: the height of the normal pdf falls off very rapidly as it moves into the tails. The effect of this is that outliers (unusually extreme observations) drastically affect the estimated parameters (Figure~\ref{fig:one}). The t-distribution is a closely related distribution in which the length of the tails is parameterized.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{t1.JPG}
+ \caption{ Motivation for t-distribution. a) The multivariate normal model fit to data. b) Adding a single outlier completely changes the fit. c) With the multivariate t-distribution the outlier does not have such a drastic effect.}
+\label{fig:one}
+\end{figure}
+The univariate t-distribution (Figure~\ref{fig:two}) has probability density~\cite{Parzen1962On} function where $\mu$ is the mean and $\sigma^2$ is the scale parameter. The degrees of freedom $\nu$ $\in$ (0, $\infty$] controls the length of the tails: when $\nu$ is small there is considerable weight in the tails. For example, with $mu$ = 0 and $\sigma^2$ = 1 a data point at x = -5 is roughly $10^4$ = 10000 times more likely under the t-distribution with $\nu$ = 1 than under the normal distribution. As $\nu$ tends to infinity, the distribution approximates a normal more and more closely and there is less weight in the tails. The variance of the distribution is given by $\sigma$$\nu$/ ($nu$ - 2) for $\nu$ $>$ 2 and infinite if 0 $<$ $\nu$ $\leq$ 2.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{t2.JPG}
+ \caption{  As well as the mean $mu$ and scaling parameter $\sigma^2$, the t-distribution has a parameter $\nu$ which is termed the degrees of freedom. As $\nu$ decreases, the tails of the distribution become longer and the model becomes more robust. b) This is seen more clearly on a log scale.}
+\label{fig:two}
+\end{figure}
+
+The multivariate t-distribution has pdf in Equation~\ref{equ:one}.
+\begin{equation}
+\begin{split}
+Pr(x) & = Stud_x[\mu, \Sigma, \nu] \\
+& = \frac{\Gamma(\frac{\nu+D}{2})}{(\nu \pi)^{D/2}|\Sigma|^{1/2}\Gamma{[\nu/2]}}(1+\frac{(x-\mu)^T\Sigma^{-1}(x-\mu)}{\nu})^{-(\nu+D)/2}
+\end{split}
+\label{equ:two}
+\end{equation}
+
+where D is the dimensionality of the space, $\mu$ is a d X 1 mean vector, $\Sigma$ is a DXD positive definite scale matrix, and $\nu$ $\in$ [0, $\infty$] is the degrees of freedom. As for the multivariate normal distribution, the scale matrix can take full, diagonal or spherical forms. The covariance of the distribution is given by $\Sigma$ $\nu$/ ($\nu$ - 2) for $\nu$ $>$ 2 and is infinite if 0 $\leq$ $\nu$ $\leq$ 2.
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{59}
+}
+
+
+\end{document}
+
