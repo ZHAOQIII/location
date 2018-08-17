@@ -1,0 +1,65 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ Student T-distribution~\cite{Jones2010A} as A Marginalization}
+\author{Qi Zhao\\\\August 17, 2018}
+
+\maketitle
+\section{Introduction}
+ As for the mixtures of Gaussians~\cite{Portilla2003Image}, it is also possible to understand the t-distribution in terms of hidden variables. It defines in Equation~\ref{equ:one}.
+\begin{equation}
+\begin{split}
+Pr(x|h) = Norm_x[\mu, \Sigma/h] \\
+Pr(h) = Gam_h[\nu/2, \nu/2]
+\end{split}
+\label{equ:one}
+\end{equation} 
+
+where h is a scalar hidden variable and Gam[$\alpha$, $\beta$] is the gamma distribution~\cite{Stacy1962A} with parameters $\alpha$, $\beta$ (Figure~\ref{fig:one}). The gamma distribution is a continuous probability distribution defined on the positive real axis with probability density function in Equation~\ref{equ:two}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{stu.JPG}
+ \caption{  The gamma distribution is defined on positive real values and has two parameters $\alpha$, $\beta$. The mean of the distribution is E[h] = $\alpha$/$\beta$ and the variance is E[(h?E[h])$^2$ ] = $\alpha$/$\beta^2$ . The t-distribution can be thought of as a weighted sum of normal distributions with the same mean, but covariances that depend inversely on the gamma distribution.}
+\label{fig:one}
+\end{figure}
+\begin{equation}\label{equ:two}
+Gam_h[\alpha, \beta] = \frac{\beta^{\alpha}}{\Gamma[\alpha]}exp[-\beta h]h^{\alpha-1}
+\end{equation}
+
+where $\Gamma$[] is the gamma function.
+
+The t-distribution is the marginalization with respect to the hidden variable h of the joint distribution between the data x and h (Figure~\ref{fig:two}).
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{stu1.JPG}
+ \caption{ a) The t-distribution has a similar form to the normal distribution but longer tails. b) The t-distribution is the marginalization of the joint distribution Pr(x,h) between the observed variable x and a hidden variable h. c) The prior distribution over the hidden variable h has a gamma distribution. d) The conditional distribution Pr(x|h) is normal with a variance that depends on h. So the t-distribution can be considered as an infinite weighted sum of normal distributions~\cite{Day1969Estimating} with variances determined by the gamma prior.}
+\label{fig:two}
+\end{figure}
+
+
+
+\section{Conclusions}
+This formulation also provides a method to generate data from the t-distribution; it first generates h from the gamma distribution and then generate x from the as-sociated normal distribution Pr(x$|$h). Hence the hidden variable has a simple interpretation: it tells which one of the continuous family of underlying normal distributions was responsible for this data point.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{60}
+}
+
+
+\end{document}
+
