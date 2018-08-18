@@ -1,0 +1,59 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Expectation Maximization~\cite{bailey1995unsupervised} for Fitting T-distributions~\cite{shoham2003robust}}
+\author{Qi Zhao\\\\August 19, 2018}
+
+\maketitle
+\section{Introduction}
+ Since the pdf takes the form of a marginalization of the joint distribution~\cite{longuet1975joint} with a hidden variable, it can use the EM algorithm to learn the parameters $\theta$ = \{$\mu$, $\Sigma$, $\nu$\} from a set of training data \{$x_i$\}$^I_{i=1}$. 
+ 
+ In the E-step (Figure~\ref{fig:one}) it maximizes the bound with respect to the distributions $q_i$ ($h_i$) by finding the posterior Pr($h_i$$|$$x_i$, $\theta^{[t]}$) over each hidden variable $h_i$ given associated observation $x_i$ and the current parameter settings. By Bayes¡¯ rule~\cite{anastasio2000using}, it gets in Equation~\ref{equ:one}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{t3.JPG}
+ \caption{Expectation maximization for fitting t-distributions. a) Estimate of distribution before update. b) In the E-step we calculate the posterior distribution Pr($h_i$ $|$$x_i$ ) over the hidden variable $h_i$ for each data point $x_i$. The color of each curve corresponds to that of the original data point in (a). c) In the M-step we use these distributions over h to update the estimate of the parameters $\theta$ = {$\mu$, $\sigma^2$, $\nu$}.}
+\label{fig:one}
+\end{figure}
+\begin{equation}
+\begin{split}
+q_i(h_i) & = Pr(h_i|x_i, \theta^{[t]}) \\
+& = \frac{Pr(x_i|h_i, \theta^{[t]})Pr(h_i)}{Pr(x_i|\theta^{[t]})}\\
+& = \frac{Norm_{x_i}[\mu,\Sigma/h_i]Gam_{h_i}[\nu/2, \nu/2]}{Pr(x_i)}\\
+& = Gam_{h_i}[\frac{\nu+D}{2}, \frac{(x_i-\mu)^T\Sigma^{-1}(x_i-\mu)}{2}+\frac{\nu}{2}]
+\end{split}
+\label{equ:one}
+\end{equation}
+where it has used the fact that the gamma distribution is conjugate to the scaling factor for the normal variance. The E-step can be understood as follows: it is treating each data point $x_i$ as if it were generated from one of the normals in the infinite mixture where the hidden variable $h_i$ determines which normal. So, the E-step computes a distribution over $h_i$, which hence determines a distribution over which normal created the data.
+
+\section{Conclusions}
+In conclusion, the multivariate t-distribution provides an improved description of data with outliers (Figure~\ref{fig:two}). It has just one more parameter than the normal (the degrees of freedom, $\nu$), and subsumes the normal as a special case (where $\nu$ becomes very large). However, this generality comes at a cost: there is no closed form solution for the maximum likelihood parameters and so it must resort to more complex approaches such as the EM algorithm~\cite{SIAM review} to fit the distribution.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{t4.JPG}
+ \caption{ Motivation for t-distribution. a) The multivariate normal model fit to data. b) Adding a single outlier completely changes the fit. c) With the multivariate t-distribution the outlier does not have such a drastic effect.}
+\label{fig:two}
+\end{figure}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{61}
+}
+
+
+\end{document}
+
