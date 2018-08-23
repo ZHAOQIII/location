@@ -1,0 +1,62 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Factor Analysis}
+\author{Qi Zhao\\\\August 23, 2018}
+
+\maketitle
+\section{Introduction}
+ As for the mixtures of Gaussians~\cite{Dasgupta1999Learning} and the t-distribution~\cite{Hartley1950Table}, it is possible to view the factor analysis model as a marginalization~\cite{Calabrese1999The} of a joint distribution between the observed data x and a K-dimensional hidden variable h. It defines in Equation~\ref{equ:one}.
+\begin{equation}
+\begin{split}
+Pr(x|h) = Norm_x[\mu + \Phi h, \Sigma]\\
+ Pr(h) = Norm_h[O, I]
+\end{split}
+\label{equ:one}
+\end{equation}
+
+where I represents the identity matrix.
+
+Expressing factor analysis as a marginalization reveals a simple method to draw samples from the distribution. It first draws a hidden variable h from the normal prior. It then draws the sample x from a normal distribution~\cite{Hoeffding1948A} with mean $\mu$ + $\Phi$h and diagonal covariance $\Sigma$.
+
+\section{Conclusions}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{factor.JPG}
+ \caption{Linear subspaces a) A one dimensional subspace (a line through the origin, O) is embedded in a two dimensional space. Any point x in the subspace can be reached by weighting the single basis vector $\phi_1$ appropriately. b) A two dimensional subspace (a plane through the origin, O) is embedded in a three dimensional space. Any point x in the subspace can be reached using a linear combination x = $\alpha\phi_1$ + $\beta\phi_2$ of the two basis functions $\phi_1$, $\phi_2$ that describe the subspace. In general a K-dimensional subspace can be described using K basis functions.}
+\label{fig:one}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{factorII.JPG}
+ \caption{Relationship between factor analysis and mixtures of Gaussians (MoG). a) Consider a MoG model where each component has identical diagonal covariance $\Sigma$. We could describe variation in a particular direction $\phi$ by parameterizing the mean of each Gaussian as $\mu_i$ = $\mu$+$\phi$$h_i$. b) Different values of the scalar hidden variable h i determine different positions along direction $\phi$. c) Now we replace the MoG with an infinite sum (integral) over a continuous family of Gaussians, each of which is determined by a certain value of h. d) If we choose the prior over the hidden variable to be normal, then this integral has a closed form solution and is a factor analyzer. e) More generally we want to describe variance in a set of directions $\Phi$ = [$\phi_1$, $\phi_2$,..., $\phi_k$] in a high dimensional space. f) To this end we use a K-dimensional hidden variable h and an associated normal prior Pr(h).}
+\label{fig:two}
+\end{figure}
+This leads to a simple interpretation of the hidden variable h: each element $h_k$ weights the associated basis function $\varphi_k$ in the matrix $\phi$ and hence defines a point on the subspace (Figure~\ref{fig:one}). The final density is hence an infinite weighted sum of normal distributions with the same diagonal covariance $\sigma$ and means $\mu$ + $\phi$h that are distributed over the subspace. The relationship between mixture models and factor analysis is explored further in Figure~\ref{fig:two}.
+
+
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{63}
+}
+
+
+\end{document}
+
