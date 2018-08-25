@@ -1,0 +1,51 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{ Combining Models}
+\author{Qi Zhao\\\\August 25, 2018}
+
+\maketitle
+There are some reasons it can get the mixture of Gaussians~\cite{Dasgupta1999Learning}, t-distribution~\cite{Jones2010A}, and factor analysis~\cite{Akaike1987Factor} models are constructed similarly: each is a weighted sum or integral of a set of constituent normal distributions~\cite{Andrews1974Scale}. Mixture of Gaussian models consist of a weighted sum of K normal distributions with different means and variances. The t-distribution consists of an infinite weighted sum of normal distributions with the same mean, but different covariances. Factor analysis models consist of an infinite weighted sum of normal distributions with different means, but the same diagonal covariance. Figure~\ref{fig:one} shows the parameters of a factor analysis model fitted to the face data using ten iterations of the EM algorithm~\cite{DebashisKushary1997The}. The different factors encode different modes of variation of the data set which often have real-world interpretations such as changes in pose or lighting.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{combine.JPG}
+ \caption{ Factor analyzer with ten factors (four shown) for face classes. a) Mean $\mu$ for face model. b) Diagonal covariance component $\Sigma$ for face model. To visualize the effect of the first factor $\phi_1$ we add (c) or subtract (d) a multiple of it from the mean: move along one axis of the 10D subspace that seems to encode mainly the mean intensity. Other factors (e-j) encode changes in the hue and the pose of the face.}
+\label{fig:one}
+\end{figure}
+
+
+There is a weighted sum of factor analyzers, each of which has a different mean and allocates high probability density to a different subspace. So it combines mixture models and factor analyzers, we get a mixture of factor analyzers (MoFA) model~\cite{Mclachlan2003Modelling}. Similarly, combining mixture models and t-distributions results in a mixture of t-distributions or robust mixture model.  Combining t-distributions and factor analyzers, it can construct a robust subspace model, which models data that lie primarily in a subspace but is tolerant to outliers. The associated density function is in Equation~\ref{equ:one}.
+\begin{equation}\label{equ:one}
+Pr(x) = \sum_{k = 1}^K\lambda_kStud_x[\mu_k, \Phi_k\Phi_k^T + \Sigma_k, \nu_k]
+\end{equation}
+
+
+where $\mu_k$, $\Phi_k$ and $\Sigma_k$ represent the mean, factors, and diagonal covariance matrix belonging to the $k^{th}$ component, $\lambda_k$ represents the weighting of the $k^th$ component and $\nu_k$ represents the degrees of freedom of the $k^{th}$ component.
+
+
+
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{64}
+}
+
+
+\end{document}
+
