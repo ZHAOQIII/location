@@ -1,0 +1,74 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Expectation Maximization~\cite{Bailey1995Unsupervised} in Detail}
+\author{Qi Zhao\\\\August 29, 2018}
+
+\maketitle
+\section{Introduction}
+The EM algorithm is used to find maximum likelihood~\cite{Dempster1977Maximum} or MAP estimates of model parameters $\theta$ where the likelihood Pr(x$|$$\theta$) of the data x can be written as in Equation~\ref{equ:one}.
+
+\begin{equation}
+\begin{split}
+Pr(x|\theta) = \sum_kPr(x, h = k|\theta) = \sum_kPr(x|h = k, \theta)Pr(h = k)\\
+Pr(x|\theta) = \int Pr(x, h|\theta)dh = \int Pr(x|h, \theta)Pr(h)dh
+\end{split}
+\label{equ:one}
+\end{equation}
+
+Where for discrete and continuous hidden variables, respectively. In other words, the likelihood Pr(x$|$$\theta$) is a marginalization of a joint distribution~\cite{Long2014Transfer} over the data and the hidden variables.
+
+
+
+\section{Descriptions}
+
+The EM algorithm relies on the idea of a lower bounding function (or lower bound), B[$\theta$] on the log likelihood. This is a function of the parameters $\theta$ that is always guaranteed to be equal to or lower than the log likelihood~\cite{Abou2018Unsupervised}. The lower bound is carefully chosen so that it is easy to maximize with respect to the parameters. This lower bound is also parameterized by a set of probability distributions \{$q_i$ ($h_i$)\}$^I_{i=1}$ over the hidden variables, so we write it as B[\{$q_i$ ($h_i$)\}, $\theta$]. Different probability distributions $q_i$ ($h_i$) predict different lower bounds B[\{$q_i$ ($h_i$)\}, $\theta$] and hence different functions of $\theta$ that lie everywhere below the true log likelihood (Figure~\ref{fig:one}).
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{em829.JPG}
+ \caption{  Jensen¡¯s inequality for the logarithmic function (discrete case). a) Taking a weighted average of examples E[y] and passing them through the log function. b) Passing the samples through the log function and taking a weighted average E[log[y]]. The latter case always produces a smaller value than the former (E[log[y]] $\leq$ log(E[y])): higher valued examples are relatively compressed by the concave log function.}
+\label{fig:one}
+\end{figure}
+
+By iterating steps, the (local) maximum of the actual log likelihood is approached (Figure~\ref{fig:two}). To complete our picture of the EM algorithm, it must:
+
+1.define B[\{$q_i$ ($h_i$)\}, $\theta^{[t?1]}$] and show that it always lies below the log likelihood;
+
+2.show which probability distribution $q_i$ ($h_i$) optimizes the bound in the E-step;
+
+3.show how to optimize the bound with respect to $\theta$ in the M-step;
+\begin{figure}[hb]
+\centering
+\includegraphics[width=0.5\textwidth]{em8291.JPG}
+ \caption{Expectation maximization algorithm. We iterate the expectation and maximization steps by alternately changing the distributions $q_i$ ($h_i$) and the parameter $\theta$ so that the bound increases. In the E-step, the bound is maximized with respect to $q_i$ ($h_i$) for fixed parameters $\theta$: the new function with respect to ¦È touches the true log likelihood at $\theta$. In the M-step, we find the maximum of this function. In this way we are guaranteed to reach a local maximum in the likelihood function.}
+\label{fig:two}
+\end{figure}
+
+
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{65}
+}
+
+
+\end{document}
+
