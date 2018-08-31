@@ -1,0 +1,54 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Object Recognition~\cite{Uijlings2013Selective}}
+\author{Qi Zhao\\\\August 31, 2018}
+
+\maketitle
+\section{Introduction}
+In object recognition the goal is to assign a discrete world vector $w_i$ $\in$ \{1,2,...,M\} indicating which of M categories is present based on observed data x. To this end, Aeschliman et al. (2010) split each image into 100 10¡Á10 pixel regions arranged in a regular grid. The grayscale pixel data from the $j^th$ region were concatenated to form a 100 ¡Á 1 vector $x_{ij}$. They treated the regions independently, and described each with a t-distribution~\cite{Aas2006The} so that the class conditional density functions were in Equation~\ref{fig:one}.
+\begin{equation}
+Pr(x_i|w = m) = \prod_{j = 1}^JStud_{x_{ij}}[\mu_{jm}, \Sigma_{jm}, \nu_{jm}]
+\label{equ:one}
+\end{equation}
+
+
+Figure~\ref{fig:one} shows results based on training with 10 classes from the Amsterdam library of images (Guesebroek et al. 2005). Each class consists of 72 images taken at 5 degree intervals around the object. The data was divided randomly into 36 test images and 36 training images for each class. The prior probabilities~\cite{Kraaij2002The} of the classes were set to uniform, and the posterior distribution Pr($w_i$$|$$x_i$ ) was calculated using Bayes¡¯ rule~\cite{Holt1996Classroom}. A test object was classified according to the class with the highest posterior probability.
+\begin{figure}[hb]
+\centering
+\includegraphics[width=0.5\textwidth]{831.JPG}
+ \caption{ Object recognition. a) The training database consists of a series of different views of ten different objects. The goal is to learn a class-conditional density function for each object and classify new examples using Bayes¡¯ rule. b) Percent correct results for class conditional densities based on the t-distribution (top row) and the normal distributions (bottom row). The robust model performs better, especially on objects with specularities. Images from Amsterdam library (Guesebroek et al. 2005).}
+\label{fig:one}
+\end{figure}
+
+
+
+\section{Conclusions}
+
+The results show the superiority of the t-distribution: for almost every class the percent correct performance is better, and this is especially true for objects such as the china pig where the specularities act as outliers. By adding just one more parameter per patch, the performance increases from a mean of 51\% to 68\%.
+
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{66}
+}
+
+
+\end{document}
+
