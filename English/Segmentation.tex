@@ -1,0 +1,48 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Segmentation~\cite{Long2017Fully}}
+\author{Qi Zhao\\\\September 2, 2018}
+
+\maketitle
+\section{Introduction}
+ The goal of segmentation is to assign a discrete label \{$w_n$\}$^N_{n=1}$ which takes one of K values $w_n$ $\in$ \{1,2,...,K\} to each of the N pixels in the image so that regions that belong to the same object are assigned the same label. The segmentation model depends on observed data vectors \{$x_n$\}$^N_{n=1}$ at each of the N pixels that would typically include the RGB pixel~\cite{Kester2013Image} values, the (x,y) position of the pixel and other information characterizing local texture.
+
+ It will frame this problem as unsupervised learning~\cite{Hofmann2001Unsupervised}. In other words, and it does not have the luxury of having training images where the state of the world is known. It must both learn the parameters $\theta$ and estimate the world states \{$w_i$\}$^I_{i=1}$ from the image data \{$x_n$\}$^N_{n=1}$.
+
+ To fit this model, the parameters $\theta$ = \{$\lambda_k$, $mu_k$, $\Sigma_k$\}$^K_{k=1}$ use the EM algorithm~\cite{Li2017An}. To assign a class to each pixel, it then finds the value of the world state that have the highest posterior probability given the observed data in Equation~\ref{equ:one}.
+ \begin{equation}\label{equ:one}
+\hat{w_i} = argmax_{w_i}[Pr(w_i|x_i)]
+\end{equation}
+
+ Figure~\ref{fig:onecol} shows results from this model and a similar mixture model based on t-distributions~\cite{Li2017Traces} from Sfikas et al. (2007). The mixture models manage to partition the image quite well into different regions. Unsurprisingly, the t-distribution results are rather less noisy than those based on the normal distribution.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{902.JPG}
+ \caption{  Segmentation. a-c) Original images. d-f) Segmentation results based on a mixture of five normal distributions. The pixels associated with the $k^{th}$ component are colored with the mean RGB values of the pixels that are assigned to this value g-i) Segmentation results based on a mixture of K t-distributions. The segmentation here is less noisy than for the MoG model. Results from Sfikas et al. (2007)  IEEE 2007.}
+\label{fig:onecol}
+\end{figure}
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{67}
+}
+
+
+\end{document}
+
