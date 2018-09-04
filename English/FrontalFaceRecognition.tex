@@ -1,0 +1,52 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[pagebackref=true,colorlinks,linkcolor=red,citecolor=green,breaklinks=true,bookmarks=false]{hyperref}
+\cvprfinalcopy
+\def\cvprPaperID{****}
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+\setcounter{page}{1}
+\begin{document}
+\title{Frontal Face Recognition~\cite{Georghiades2001From}}
+\author{Qi Zhao\\\\September 4, 2018}
+
+\maketitle
+The goal of face identification (Figure~\ref{fig:one}) is to assign a label w $\in$ \{1...M\} indicating which of M possible identities the face belongs to based on a data vector x. The model is learned from labeled training data \{$x_i$, $w_i$\}$^I_{i=1}$ where the identity is known. In a simple system, the data vector might consist of the concatenated grayscale values from the face image, which should be reasonably large (say 50 X 50 pixels) to ensure that the identity is well represented.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{904.JPG}
+ \caption{ Face recognition. Our goal is to take the RGB values of a facial image x and assign a label w $\in$ \{1...K\} corresponding to the identity. Since the data are high-dimensional , we model the class conditional density function Pr(x$|$w = k) for each individual in the database as a factor analyzer. To classify a new face, we apply Bayes¡¯ rule~\cite{Sandroni2005Efficient} with suitable priors Pr(w) to compute the posterior distribution~\cite{Brodersen2010The} Pr(w$|$x). We choose the label $\hat{w}$ =argma$x_w$ [Pr(w = k$|$x)] that maximizes the posterior. This approach assumes that there are sufficient training examples to learn a factor analyzer for each class.}
+\label{fig:one}
+\end{figure}
+
+
+Since the data are high dimensional, a reasonable approach is to model each class conditional density function with a factor analyzer in Equation~\ref{equ:one}.
+\begin{equation}\label{equ:one}
+Pr(x_i | w_i = k) = Norm_{x_i}[\mu_k, \Phi_k \Phi_k^T + \Sigma_k]
+\end{equation}
+
+
+where the parameters for the $k^{th}$ identity $\theta_k$ = $\mu_k$, $\Phi_k$, $\Sigma_k$ can be learned from the subset of data that belongs to that identity using the EM algorithm~\cite{Dempster2015Maximum}. It also assign priors P(w = k) according to the prevalence of each identity in the database.
+
+To perform recognition, it computes the posterior distribution Pr(w*$|$x*) for the new data example x* using Bayes¡¯ rule. And it assign the identity that maximizes this posterior distribution. This approach works well if there are sufficient examples of each gallery individual to learn a factor analyzer, and if the poses of all of the faces are similar. In the next example, it develops a method to change the pose of faces, so that we can cope with the case where the poses differ.
+
+
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{68}
+}
+
+
+\end{document}
+
